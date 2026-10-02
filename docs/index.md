@@ -43,10 +43,10 @@ La revisión de código es el ejemplo más claro de un requisito que se suele at
 
 El texto exige que el procedimiento incluya revisiones de código. No dice que cada cambio deba pasar una, ni con las dos técnicas. Cabe sostener que, leídos juntos, los apartados 2 y 3 lo implican para cada mantenimiento. Pero eso es una lectura, no lo que dice el texto. Lo que DORA sí exige de cada cambio es que se someta «a prueba» (art. 9.4.e), y una prueba no es una revisión de código.
 
-La herramienta lo trata así. Un cambio con código fuente y sin ninguna revisión, como el caso base del corpus ([caso 01](https://github.com/mshodai/registro-cambio-agente-dora/blob/main/corpus/01-base-limpia.json)) con `revisiones_codigo` vacía, no da incumplimiento, sino un aviso que remite a la lectura del modelo de datos:
+La herramienta lo trata así. Un cambio con código fuente y sin ninguna revisión no da incumplimiento, sino un aviso que remite a la lectura del modelo de datos. El ejemplo [`sin-revision.json`](https://github.com/mshodai/registro-cambio-agente-dora/blob/main/docs/ejemplos/sin-revision.json) ([resultado esperado](https://github.com/mshodai/registro-cambio-agente-dora/blob/main/docs/ejemplos/sin-revision.esperado.json)) es el [caso 01 del corpus](https://github.com/mshodai/registro-cambio-agente-dora/blob/main/corpus/01-base-limpia.json) sin ninguna revisión de código: `revisiones_codigo` está vacía.
 
 ```
-$ registro-cambio-agente sin-revision.json
+$ registro-cambio-agente docs/ejemplos/sin-revision.json
 [...]
 Régimen completo:
   0 incumplimientos; 1 aviso de lectura propia.
@@ -64,6 +64,8 @@ El aviso sigue exigiendo actuar, y el código de salida es 1: con esa lectura fa
 
 La misma razón vale para quién revisa. Ni el art. 16 ni ningún otro artículo del Reglamento Delegado dicen que la revisión tenga que hacerla una persona. Si la hace un agente, la herramienta la cuenta como revisión del art. 16.3. Solo avisa si el agente que revisa es el mismo que implantó el cambio, y como aviso, no como incumplimiento.
 
+Hay un matiz. Según el modelo, el plan de acción ante las vulnerabilidades encontradas (art. 16.3.b: «adoptar un plan de acción para hacer frente a esas vulnerabilidades y anomalías») debe adoptarlo al menos una persona. Su seguimiento (art. 16.3.c) también debe incluir al menos a una persona. La razón es que un agente no puede ser titular de esa responsabilidad. Pero el art. 16.3 no dice quién adopta el plan ni quién lo sigue, así que también esto es una lectura propia (D-2), y la herramienta lo da como aviso, no como incumplimiento.
+
 ## El régimen simplificado no exige independencia
 
 DORA, art. 16.1: «Los artículos 5 a 15 del presente Reglamento no se aplicarán a las empresas de servicios de inversión pequeñas y no interconectadas ni a las entidades de pago exentas en virtud de la Directiva (UE) 2015/2366; ni a las entidades exentas en virtud de la Directiva 2013/36/UE [...], ni a las entidades de dinero electrónico exentas en virtud de la Directiva 2009/110/CE; ni a los fondos de pensiones de empleo pequeños». Para ellas no rige el art. 9.4.e), y el art. 17 del Reglamento Delegado está en su título II, que tampoco les corresponde.
@@ -76,10 +78,10 @@ En el régimen simplificado, que la misma persona solicite y apruebe no es un in
 
 ## El flujo con agentes que incumple el art. 17.1.b)
 
-Vuelta al caso del principio. Una persona encarga el cambio, responde del agente que lo implanta y lo aprueba. En el corpus, es el [caso 06](https://github.com/mshodai/registro-cambio-agente-dora/blob/main/corpus/06-art-17-1-b-aviso-d-1-aprueba-el-responsable-del-agente.json) ([resultado esperado](https://github.com/mshodai/registro-cambio-agente-dora/blob/main/corpus/06-art-17-1-b-aviso-d-1-aprueba-el-responsable-del-agente.esperado.json)), en el que aprueba la responsable del agente, con un cambio: la solicitud también es suya (`"solicitud": {"actores": ["P-3"], ...}`).
+Vuelta al caso del principio. Una persona encarga el cambio, responde del agente que lo implanta y lo aprueba. Es el ejemplo [`flujo.json`](https://github.com/mshodai/registro-cambio-agente-dora/blob/main/docs/ejemplos/flujo.json) ([resultado esperado](https://github.com/mshodai/registro-cambio-agente-dora/blob/main/docs/ejemplos/flujo.esperado.json)). Parte del [caso 06 del corpus](https://github.com/mshodai/registro-cambio-agente-dora/blob/main/corpus/06-art-17-1-b-aviso-d-1-aprueba-el-responsable-del-agente.json), en el que aprueba la persona responsable del agente, y solo cambia una cosa: la solicitud también es suya.
 
 ```
-$ registro-cambio-agente flujo.json
+$ registro-cambio-agente docs/ejemplos/flujo.json
 [...]
 Régimen completo:
   1 incumplimiento; 1 aviso de lectura propia.
@@ -104,7 +106,9 @@ El resultado separa dos cosas que en la práctica van juntas:
 
 Que implante un agente no aporta ninguna separación. La independencia del art. 17.1.b) tiene dos lados, quien aprueba frente a quien solicita y quien aprueba frente a quien aplica, y el agente solo cambia quién aplica. Si el flujo de trabajo pone a la misma persona a encargar y a aprobar, el registro de cada cambio lo mostrará como un fallo del mecanismo.
 
-**La separación tiene que configurarse aparte.** No sale del agente ni de la herramienta que lo ejecuta, sino de cómo la entidad reparte las funciones y los permisos. El propio Reglamento Delegado lo pide en el control de acceso. Art. 21.b): «la separación de funciones con el fin de impedir el acceso injustificado a datos esenciales o la asignación de combinaciones de derechos de acceso que puedan utilizarse para eludir los controles». Una cuenta que puede encargar un cambio a un agente y aprobar su resultado es una de esas combinaciones.
+**La separación tiene que configurarse aparte.** No sale del agente ni de la herramienta que lo ejecuta, sino de cómo la entidad reparte las funciones y los permisos. El Reglamento Delegado ofrece un apoyo en el control de acceso. Art. 21.b): la política de control de acceso incluirá «la separación de funciones con el fin de impedir el acceso injustificado a datos esenciales o la asignación de combinaciones de derechos de acceso que puedan utilizarse para eludir los controles».
+
+Una cuenta que puede encargar un cambio a un agente y también aprobar su resultado **puede ser** una de esas combinaciones: permite saltarse el control de independencia del art. 17.1.b) sin que nadie más intervenga. Pero es una lectura, no lo que dice el texto. El art. 21.b) no menciona los cambios ni los agentes, y decidir qué combinaciones permiten «eludir los controles» le corresponde a la entidad. Por eso la herramienta no comprueba los permisos: lo que da como incumplimiento es el hecho, que la misma persona solicitó y aprobó.
 
 ## Qué hace la herramienta
 
@@ -124,6 +128,16 @@ El [modelo de datos](https://github.com/mshodai/registro-cambio-agente-dora/blob
 - qué pasa con los cambios urgentes en el régimen simplificado (D-5).
 
 El [corpus](https://github.com/mshodai/registro-cambio-agente-dora/blob/main/corpus/README.md) tiene un caso sintético por cada incumplimiento o aviso posible, con su resultado esperado escrito a mano.
+
+## Qué hacer
+
+Para quien decide en una entidad sujeta al régimen completo, de lo anterior salen tres cosas.
+
+**Separar quién encarga un cambio y quién lo aprueba, en las funciones y en los permisos.** El art. 17.1.b) exige mecanismos que garanticen esa independencia, y el art. 21.b) ofrece dónde apoyarla: la separación de funciones en el control de acceso. Si una misma cuenta puede encargar el trabajo a un agente y aprobarlo, el mecanismo depende de que nadie lo use así.
+
+**Registrar cada cambio con sus actores, incluido el agente y quién responde de él.** DORA exige que todos los cambios «se registren» (art. 9.4.e), y el Reglamento Delegado, que los usuarios «sean identificables cuando realicen acciones en los sistemas de TIC» (art. 21.c). Un registro que diga qué agente hizo qué, y qué persona responde de él, es el único que permite ver después si la independencia se respetó.
+
+**No tomar como prueba de cumplimiento un «cumple» en requisitos que dependen de un mecanismo de la entidad.** La independencia (art. 17.1.b), las responsabilidades (art. 17.1.c), el procedimiento de emergencia (art. 17.1.f) y las medidas contra la manipulación (art. 16.1.c) se demuestran en el procedimiento, no en el registro de un cambio. Una herramienta que dé «cumple» en ellos dice más de lo que el registro contiene.
 
 ## La consecuencia general
 
