@@ -28,16 +28,6 @@
       "modelo": "MODELO-EJEMPLO",
       "version": "0.0-ejemplo",
       "persona_responsable": "P-3"
-    },
-    {
-      "id": "AG-2",
-      "tipo": "agente_ia",
-      "funcion": "FUNCION-APROBACION-EJEMPLO",
-      "cuenta": "CUENTA-EJEMPLO-5",
-      "herramienta": "HERRAMIENTA-EJEMPLO-2",
-      "modelo": "MODELO-EJEMPLO-2",
-      "version": "0.0-ejemplo",
-      "persona_responsable": "P-2"
     }
   ],
   "cambio": {
@@ -264,12 +254,7 @@
           ],
           "fecha": "2026-11-10T11:00:00+01:00"
         },
-        "aprobacion": {
-          "actores": [
-            "AG-2"
-          ],
-          "fecha": "2026-11-10T12:00:00+01:00"
-        }
+        "aprobacion": null
       }
     },
     "implantacion": {
@@ -284,20 +269,20 @@
       "actores": [
         "P-3"
       ],
-      "fecha": "2026-11-10T08:00:00+01:00",
+      "fecha": "2026-11-09T23:40:00+01:00",
       "resultado": "conforme",
       "descripcion": null
     },
     "acciones": [
       {
         "actor": "AG-1",
-        "fecha": "2026-11-09T09:05:00+01:00",
+        "fecha": "2026-11-09T23:10:00+01:00",
         "etapa": "implantacion",
         "descripcion": "Acción de ejemplo 1 (inventada)"
       },
       {
         "actor": "AG-1",
-        "fecha": "2026-11-09T09:40:00+01:00",
+        "fecha": "2026-11-09T23:25:00+01:00",
         "etapa": "implantacion",
         "descripcion": "Acción de ejemplo 2 (inventada)"
       }

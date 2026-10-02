@@ -50,18 +50,25 @@ def test_la_linea_de_ordenes_da_el_codigo_esperado(esperado, capsys):
 @pytest.mark.parametrize("caso", G.CASOS[1:], ids=lambda c: c.nombre)
 def test_cada_caso_roto_lleva_su_articulo_en_el_nombre(caso):
     assert re.search(r"-(art|dora|modelo)-", caso.nombre), caso.nombre
+    if any(a.startswith("A-03") for t in (caso.completo, caso.simplificado) for a in t[1]):
+        assert "-aviso-" in caso.nombre, caso.nombre
     assert caso.articulo != "—"
 
 
 @pytest.mark.parametrize("caso", G.CASOS[1:], ids=lambda c: c.nombre)
 def test_cada_caso_roto_rompe_una_sola_cosa(caso):
-    """Un incumplimiento o un aviso, en uno o en los dos regímenes (D-5 añade R-23 en el simplificado)."""
-    completo, simplificado = caso.esperado["completo"], caso.esperado["simplificado"]
-    roto_c = completo["incumplimientos"] + completo["avisos"]
-    roto_s = [r for r in simplificado["incumplimientos"] + simplificado["avisos"]]
+    """Un requisito o un aviso, en uno o en los dos regímenes.
+
+    Un A-03 cuenta por su requisito, y en la base de emergencia no cuenta el R-23
+    del simplificado, que viene de la base (D-5).
+    """
+    def requisitos(r):
+        return {a.removeprefix("A-03 ") for a in r["incumplimientos"] + r["avisos"]}
+
+    completo, simplificado = requisitos(caso.esperado["completo"]), requisitos(caso.esperado["simplificado"])
     if caso.base is G.base_emergencia:
-        roto_s = [r for r in roto_s if r != "R-23"]
-    assert len(set(roto_c) | set(roto_s)) == 1 or caso.nombre.startswith("20-"), (roto_c, roto_s)
+        simplificado.discard("R-23")
+    assert len(completo | simplificado) == 1 or caso.nombre.startswith("20-"), (completo, simplificado)
 
 
 def _todos(campo):
@@ -70,16 +77,48 @@ def _todos(campo):
             yield from r[campo]
 
 
+# Requisitos que solo pueden fallar por una lectura propia (modelo, §0.1 bis, principio 2).
+SOLO_LECTURA = {"R-03", "R-06", "R-17", "R-20", "R-22", "R-26"}
+GARANTIZADOS = {"R-01", "R-04", "R-08", "R-24"}
+
+
 def test_el_corpus_produce_todos_los_incumplimientos_posibles():
-    # R-01, R-04, R-08 y R-24 no pueden dar incumplimiento: la carga ya exige sus datos.
-    posibles = {f"R-{n:02}" for n in range(1, 29)} - {"R-01", "R-04", "R-08", "R-24"}
+    posibles = {f"R-{n:02}" for n in range(1, 29)} - GARANTIZADOS - SOLO_LECTURA
     producidos = {r["id"] for r in _todos("requisitos") if r["estado"] == "incumplimiento"}
     assert producidos == posibles
 
 
+def test_el_corpus_produce_todos_los_avisos_de_lectura_posibles():
+    posibles = {
+        "R-03", "R-05", "R-06", "R-11", "R-12", "R-13", "R-14", "R-16", "R-17",
+        "R-18", "R-19", "R-20", "R-22", "R-23", "R-25", "R-26", "R-27", "R-28",
+    }
+    assert {a["requisito"] for a in _todos("avisos") if a["codigo"] == "A-03"} == posibles
+
+
 def test_el_corpus_produce_todos_los_avisos_e_informativos():
-    assert {a["codigo"] for a in _todos("avisos")} == {"A-01", "A-02"}
+    assert {a["codigo"] for a in _todos("avisos")} == {"A-01", "A-02", "A-03"}
     assert {a["codigo"] for a in _todos("informativos")} == {"I-01", "I-02"}
+
+
+def test_ningun_resultado_de_lectura_propia_sale_como_incumplimiento():
+    """Modelo, §0.1 bis, principio 2: el incumplimiento solo lo da el texto."""
+    for r in _todos("requisitos"):
+        if r["estado"] == "incumplimiento":
+            assert r["id"] not in SOLO_LECTURA
+            assert not any(m.startswith("Con la lectura") for m in r["motivos"]), r
+
+
+@pytest.mark.parametrize("caso", [c for c in G.CASOS if "-aviso-" in c.nombre and not c.nombre.startswith(("40-", "41-"))], ids=lambda c: c.nombre)
+def test_un_caso_de_lectura_propia_da_aviso_y_no_incumplimiento(caso):
+    datos = como_dict(informe(cargar_fichero(CORPUS / f"{caso.nombre}.json")))["regimenes"]
+    for regimen, r in datos.items():
+        for a in r["avisos"]:
+            if a["codigo"] != "A-03":
+                continue
+            req = next(x for x in r["requisitos"] if x["id"] == a["requisito"])
+            assert req["estado"] in ("aviso", "sin_indicio_de_incumplimiento"), (regimen, req)
+    assert datos["completo"]["incumplimientos"] == []
 
 
 def _ids_y_textos(valor):

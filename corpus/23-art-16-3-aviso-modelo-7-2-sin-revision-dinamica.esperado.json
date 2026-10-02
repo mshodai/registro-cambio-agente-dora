@@ -1,0 +1,22 @@
+{
+  "caso": "23-art-16-3-aviso-modelo-7-2-sin-revision-dinamica",
+  "articulo": "Art. 16.3; modelo §7.2",
+  "descripcion": "Ninguna revisión usa la técnica dinámica: aviso.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-17"
+      ],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

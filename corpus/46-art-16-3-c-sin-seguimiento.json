@@ -185,16 +185,7 @@
             }
           ]
         },
-        "seguimiento": [
-          {
-            "actores": [
-              "P-3"
-            ],
-            "fecha": "2026-11-05T15:30:00+01:00",
-            "estado": "completado",
-            "descripcion": null
-          }
-        ],
+        "seguimiento": [],
         "evidencias": [
           {
             "referencia": "EVIDENCIA-EJEMPLO-5",
@@ -229,52 +220,26 @@
       "procedimiento": "Procedimiento de ejemplo (inventado)",
       "ejecucion": null
     },
-    "aprobacion": null,
-    "emergencia": {
-      "tipo": "parche",
-      "motivo": "Motivo de ejemplo (inventado)",
-      "procedimiento": "Procedimiento de emergencia de ejemplo (inventado)",
-      "salvaguardias": "Salvaguardias de ejemplo (inventadas)",
-      "revision_posterior": {
-        "documentacion": {
-          "actores": [
-            "P-3"
-          ],
-          "fecha": "2026-11-10T09:00:00+01:00"
-        },
-        "reexamen": {
-          "actores": [
-            "P-3"
-          ],
-          "fecha": "2026-11-10T10:00:00+01:00"
-        },
-        "evaluacion": {
-          "actores": [
-            "P-2"
-          ],
-          "fecha": "2026-11-10T11:00:00+01:00"
-        },
-        "aprobacion": {
-          "actores": [
-            "P-2"
-          ],
-          "fecha": "2026-11-10T12:00:00+01:00"
-        }
-      }
+    "aprobacion": {
+      "actores": [
+        "P-2"
+      ],
+      "fecha": "2026-11-06T10:00:00+01:00"
     },
+    "emergencia": null,
     "implantacion": {
       "actores": [
         "AG-1"
       ],
-      "inicio": "2026-11-09T23:10:00+01:00",
-      "fin": "2026-11-09T23:25:00+01:00",
+      "inicio": "2026-11-09T09:05:00+01:00",
+      "fin": "2026-11-09T09:40:00+01:00",
       "resultado": "aplicado"
     },
     "verificacion_posterior": {
       "actores": [
         "P-3"
       ],
-      "fecha": "2026-11-10T08:00:00+01:00",
+      "fecha": "2026-11-09T11:00:00+01:00",
       "resultado": "conforme",
       "descripcion": null
     },

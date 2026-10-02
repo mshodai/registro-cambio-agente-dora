@@ -1,13 +1,13 @@
 {
-  "caso": "26-art-16-3-c-d-2-seguimiento-solo-por-un-agente",
+  "caso": "26-art-16-3-c-aviso-d-2-seguimiento-solo-por-un-agente",
   "articulo": "Art. 16.3.c); D-2, punto 3",
-  "descripcion": "El seguimiento lo hace solo un agente.",
+  "descripcion": "El seguimiento lo hace solo un agente: aviso.",
   "resultado": {
     "completo": {
-      "incumplimientos": [
-        "R-19"
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-19"
       ],
-      "avisos": [],
       "informativos": []
     },
     "simplificado": {

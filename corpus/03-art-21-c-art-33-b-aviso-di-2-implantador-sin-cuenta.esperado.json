@@ -1,0 +1,24 @@
+{
+  "caso": "03-art-21-c-art-33-b-aviso-di-2-implantador-sin-cuenta",
+  "articulo": "Arts. 21.c) y 33.b); modelo §3.1; DI-2",
+  "descripcion": "El agente que implanta no tiene cuenta. Registrar la cuenta lo pide el modelo: aviso en los dos regímenes.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-03"
+      ],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-03"
+      ],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

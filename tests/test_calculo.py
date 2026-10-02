@@ -43,7 +43,7 @@ def test_cada_resultado_cita_su_articulo():
             assert r.estado in ESTADOS
             assert CITA.search(r.cita), (nombre, regimen, r.id, r.cita)
         for a in res.avisos + res.informativos:
-            assert re.search(r"art\.|D-\d|§", a.cita), (nombre, a)
+            assert re.search(r"art\.|D-\d|DI-\d|§", a.cita, re.I), (nombre, a)
 
 
 def test_un_requisito_de_mecanismo_nunca_da_cumple():
@@ -90,17 +90,39 @@ def test_sin_indicio_dice_que_el_registro_no_prueba_el_mecanismo():
     assert any("no puede probar" in n for n in r05.notas)
 
 
-def test_misma_funcion_depende_de_la_lectura_del_considerando():
+def test_misma_funcion_da_sin_indicio_con_aviso_de_la_d_1():
     caso = next(c for c in G.CASOS if c.nombre.startswith("05-"))
-    r05 = next(r for r in calcular(carga_de(caso.entrada()).entrada, COMPLETO).resultados if r.id == "R-05")
-    assert r05.estado == "incumplimiento"
-    assert any("considerando 17" in n for n in r05.notas)
+    res = calcular(carga_de(caso.entrada()).entrada, COMPLETO)
+    r05 = next(r for r in res.resultados if r.id == "R-05")
+    assert r05.estado == "sin_indicio_de_incumplimiento"
     assert not any("Ninguna lectura lo salva" in n for n in r05.notas)
+    (aviso,) = res.avisos_de_lectura
+    assert aviso.requisito == "R-05" and "considerando 17" in aviso.lectura
+
+
+def test_un_requisito_que_no_es_de_mecanismo_da_aviso():
+    caso = next(c for c in G.CASOS if c.nombre.startswith("31-"))
+    for regimen in (COMPLETO, SIMPLIFICADO):
+        res = calcular(carga_de(caso.entrada()).entrada, regimen)
+        r23 = next(r for r in res.resultados if r.id == "R-23")
+        assert r23.estado == "aviso" and r23.motivos[0].startswith("Con la lectura D-4")
+        assert [a.lectura for a in res.avisos_de_lectura] == ["D-4"]
+        assert res.activadores == ("R-23 (lectura propia: D-4)",)
+
+
+def test_los_garantizados_dicen_que_los_garantiza_la_carga():
+    res = calcular(carga_de(G.base_limpia()).entrada, COMPLETO)
+    garantizados = {r.id for r in res.resultados if r.garantizado}
+    assert garantizados == {"R-01", "R-04", "R-08", "R-24"}
+    for r in res.resultados:
+        if r.garantizado:
+            assert r.estado == "cumple" and r.motivos == ("Garantizado por la validación de entrada.",)
 
 
 def test_d_5_la_nota_de_emergencia_va_en_la_aprobacion_del_simplificado():
     entrada = carga_de(G.base_emergencia()).entrada
     r23 = next(r for r in calcular(entrada, SIMPLIFICADO).resultados if r.id == "R-23")
+    # Art. 37.b) literal: incumplimiento; la D-5 documenta la lectura alternativa en una nota.
     assert r23.estado == "incumplimiento" and any("D-5" in n for n in r23.notas)
     r23c = next(r for r in calcular(entrada, COMPLETO).resultados if r.id == "R-23")
     assert r23c.estado == NO_APLICA

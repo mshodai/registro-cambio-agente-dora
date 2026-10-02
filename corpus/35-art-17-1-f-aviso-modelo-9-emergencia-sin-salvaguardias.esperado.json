@@ -1,11 +1,13 @@
 {
-  "caso": "20-emergencia-bien-registrada-d-5-art-37-b-simplificado",
-  "articulo": "Art. 37.b); D-5",
-  "descripcion": "Parche de emergencia bien registrado: el completo no tiene incumplimientos; el simplificado no admite excepción de emergencia.",
+  "caso": "35-art-17-1-f-aviso-modelo-9-emergencia-sin-salvaguardias",
+  "articulo": "Art. 17.1.f); modelo §9",
+  "descripcion": "Cambio de emergencia sin salvaguardias en el registro: sin indicio, con aviso.",
   "resultado": {
     "completo": {
       "incumplimientos": [],
-      "avisos": [],
+      "avisos": [
+        "A-03 R-26"
+      ],
       "informativos": []
     },
     "simplificado": {

@@ -1,0 +1,22 @@
+{
+  "caso": "14-art-17-1-h-aviso-modelo-6-2-medidas-adicionales-sin-detallar",
+  "articulo": "Art. 17.1.h); modelo §6.2",
+  "descripcion": "Hacen falta medidas adicionales y no se dice cuáles: aviso.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-12"
+      ],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "caso": "31-art-37-b-aviso-d-4-aprobacion-solo-por-un-agente",
+  "articulo": "Art. 37.b); D-4",
+  "descripcion": "Aprueba solo un agente: aviso en los dos regímenes.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-23"
+      ],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-23"
+      ],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

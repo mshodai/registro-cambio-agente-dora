@@ -1,0 +1,24 @@
+{
+  "caso": "45-art-21-c-art-33-b-aviso-di-8-prueba-sin-autor",
+  "articulo": "Arts. 21.c) y 33.b); modelo §7.1; DI-8",
+  "descripcion": "Una prueba no dice quién la hizo: aviso en los dos regímenes.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-03"
+      ],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-03"
+      ],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

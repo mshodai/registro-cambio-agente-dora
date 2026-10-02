@@ -1,11 +1,11 @@
 {
-  "caso": "14-art-17-1-h-medidas-adicionales-sin-detallar",
-  "articulo": "Art. 17.1.h)",
-  "descripcion": "Hacen falta medidas adicionales y no se dice cuáles.",
+  "caso": "02-art-17-1-d-i-sin-elementos",
+  "articulo": "Art. 17.1.d.i); art. 17.1, encabezado",
+  "descripcion": "No dice qué se cambia: incumplimiento en el completo.",
   "resultado": {
     "completo": {
       "incumplimientos": [
-        "R-12"
+        "R-02"
       ],
       "avisos": [],
       "informativos": []

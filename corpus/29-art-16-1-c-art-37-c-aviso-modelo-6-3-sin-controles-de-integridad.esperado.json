@@ -1,0 +1,24 @@
+{
+  "caso": "29-art-16-1-c-art-37-c-aviso-modelo-6-3-sin-controles-de-integridad",
+  "articulo": "Art. 16.1.c); art. 37.c); modelo §6.3",
+  "descripcion": "No hay medidas contra la manipulación en el registro: sin indicio, con aviso en los dos regímenes.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-22"
+      ],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-22"
+      ],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

@@ -254,7 +254,12 @@
           ],
           "fecha": "2026-11-10T11:00:00+01:00"
         },
-        "aprobacion": null
+        "aprobacion": {
+          "actores": [
+            "P-2"
+          ],
+          "fecha": "2026-11-10T12:00:00+01:00"
+        }
       }
     },
     "implantacion": {
@@ -269,20 +274,20 @@
       "actores": [
         "P-3"
       ],
-      "fecha": "2026-11-10T08:00:00+01:00",
+      "fecha": "2026-11-09T23:40:00+01:00",
       "resultado": "conforme",
       "descripcion": null
     },
     "acciones": [
       {
         "actor": "AG-1",
-        "fecha": "2026-11-09T09:05:00+01:00",
+        "fecha": "2026-11-09T23:10:00+01:00",
         "etapa": "implantacion",
         "descripcion": "Acción de ejemplo 1 (inventada)"
       },
       {
         "actor": "AG-1",
-        "fecha": "2026-11-09T09:40:00+01:00",
+        "fecha": "2026-11-09T23:25:00+01:00",
         "etapa": "implantacion",
         "descripcion": "Acción de ejemplo 2 (inventada)"
       }

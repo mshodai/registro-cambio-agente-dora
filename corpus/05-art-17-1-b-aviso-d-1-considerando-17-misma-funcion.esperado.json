@@ -1,13 +1,13 @@
 {
-  "caso": "05-art-17-1-b-considerando-17-d-1-misma-funcion",
+  "caso": "05-art-17-1-b-aviso-d-1-considerando-17-misma-funcion",
   "articulo": "Art. 17.1.b); considerando 17; D-1",
-  "descripcion": "Solicita una persona distinta de la misma función que aprueba.",
+  "descripcion": "Solicita otra persona de la misma función que aprueba: sin indicio, con aviso de la D-1.",
   "resultado": {
     "completo": {
-      "incumplimientos": [
-        "R-05"
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-05"
       ],
-      "avisos": [],
       "informativos": []
     },
     "simplificado": {

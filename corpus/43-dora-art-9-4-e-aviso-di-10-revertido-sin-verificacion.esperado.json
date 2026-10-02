@@ -1,0 +1,24 @@
+{
+  "caso": "43-dora-art-9-4-e-aviso-di-10-revertido-sin-verificacion",
+  "articulo": "DORA, art. 9.4.e); art. 38.2; dudas, DI-10",
+  "descripcion": "Cambio revertido sin verificación posterior: aviso en los dos regímenes.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-28"
+      ],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-28"
+      ],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

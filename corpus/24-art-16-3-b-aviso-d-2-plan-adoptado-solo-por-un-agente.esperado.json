@@ -1,13 +1,13 @@
 {
-  "caso": "24-art-16-3-b-d-2-plan-adoptado-solo-por-un-agente",
+  "caso": "24-art-16-3-b-aviso-d-2-plan-adoptado-solo-por-un-agente",
   "articulo": "Art. 16.3.b); D-2, punto 2",
-  "descripcion": "El plan de acción lo adopta solo un agente.",
+  "descripcion": "El plan de acción lo adopta solo un agente: aviso.",
   "resultado": {
     "completo": {
-      "incumplimientos": [
-        "R-18"
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-18"
       ],
-      "avisos": [],
       "informativos": []
     },
     "simplificado": {

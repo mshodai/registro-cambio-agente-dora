@@ -1,0 +1,23 @@
+{
+  "caso": "06-art-17-1-b-aviso-d-1-aprueba-el-responsable-del-agente",
+  "articulo": "Art. 17.1.b); D-1; modelo §3.2",
+  "descripcion": "Aprueba la persona responsable del agente que implanta: sin indicio, con aviso de la D-1.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-05"
+      ],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-01",
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

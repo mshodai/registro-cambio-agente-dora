@@ -1,0 +1,24 @@
+{
+  "caso": "44-dora-art-9-4-e-aviso-modelo-10-verificacion-anterior-a-la-implantacion",
+  "articulo": "DORA, art. 9.4.e); art. 38.2; modelo §10",
+  "descripcion": "La verificación posterior es anterior a la implantación: aviso en los dos regímenes.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-28"
+      ],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-28"
+      ],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

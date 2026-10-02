@@ -1,19 +1,17 @@
 {
-  "caso": "36-art-17-1-g-di-6-revision-posterior-pendiente",
-  "articulo": "Art. 17.1.g); dudas, DI-6",
-  "descripcion": "Falta la aprobación posterior del cambio de emergencia.",
+  "caso": "46-art-16-3-c-sin-seguimiento",
+  "articulo": "Art. 16.3.c)",
+  "descripcion": "El plan de acción no tiene seguimiento.",
   "resultado": {
     "completo": {
       "incumplimientos": [
-        "R-27"
+        "R-19"
       ],
       "avisos": [],
       "informativos": []
     },
     "simplificado": {
-      "incumplimientos": [
-        "R-23"
-      ],
+      "incumplimientos": [],
       "avisos": [],
       "informativos": [
         "I-02"

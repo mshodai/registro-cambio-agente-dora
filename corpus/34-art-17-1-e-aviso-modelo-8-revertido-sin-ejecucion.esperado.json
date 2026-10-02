@@ -1,0 +1,22 @@
+{
+  "caso": "34-art-17-1-e-aviso-modelo-8-revertido-sin-ejecucion",
+  "articulo": "Art. 17.1.e); modelo §8",
+  "descripcion": "El cambio se revirtió y no consta cómo: aviso.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-25"
+      ],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

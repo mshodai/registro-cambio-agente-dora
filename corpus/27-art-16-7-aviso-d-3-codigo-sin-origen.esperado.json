@@ -1,0 +1,22 @@
+{
+  "caso": "27-art-16-7-aviso-d-3-codigo-sin-origen",
+  "articulo": "Arts. 16.7 y 16.8; D-3",
+  "descripcion": "El cambio incluye código y no declara su origen: aviso.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-20"
+      ],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

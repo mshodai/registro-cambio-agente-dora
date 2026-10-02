@@ -1,0 +1,25 @@
+{
+  "caso": "42-art-16-2-aviso-di-4-emergencia-sin-pruebas-previas",
+  "articulo": "Art. 16.2; art. 37.b); dudas, DI-4; D-5",
+  "descripcion": "Cambio de emergencia sin pruebas previas: aviso en el completo (DI-4); incumplimiento del art. 37.b) literal en el simplificado.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-14"
+      ],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [
+        "R-14",
+        "R-23"
+      ],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

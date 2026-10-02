@@ -6,8 +6,10 @@ Uso, desde la raíz del repositorio:
 
 Cada caso parte de una base limpia (el ejemplo del §1.1 de docs/modelo-datos.md
 con una revisión hecha por una persona, para que no lleve el aviso A-01) o de
-una base de emergencia (el §1.2 con la verificación posterior tras la
-implantación; dudas, DI-7), y rompe un solo requisito o provoca un solo aviso.
+una base de emergencia (el ejemplo del §1.2), y rompe un solo requisito o
+provoca un solo aviso. Los casos que dan un aviso de lectura propia (A-03)
+llevan en el nombre «aviso» y la lectura de la que sale (D-n, DI-n o la
+sección del modelo).
 El nombre de cada caso lleva el artículo que rompe.
 
 Los resultados esperados están escritos a mano a partir de docs/modelo-datos.md.
@@ -58,10 +60,8 @@ def base_limpia():
 def base_emergencia():
     e = base_limpia()
     emergencia = ejemplos_del_modelo()["1.2"]["cambio"]
-    for clave in ("aprobacion", "emergencia", "implantacion"):
+    for clave in ("aprobacion", "emergencia", "implantacion", "verificacion_posterior", "acciones"):
         e["cambio"][clave] = copy.deepcopy(emergencia[clave])
-    # Dudas, DI-7: la verificación posterior, tras la implantación de emergencia.
-    e["cambio"]["verificacion_posterior"]["fecha"] = "2026-11-10T08:00:00+01:00"
     return e
 
 
@@ -98,7 +98,11 @@ class Caso:
         def r(t):
             return {"incumplimientos": list(t[0]), "avisos": list(t[1]), "informativos": list(t[2])}
 
-        codigo = 1 if self.completo[0] or self.simplificado[0] else 0
+        # 1 si hay un incumplimiento o un aviso de lectura propia (A-03) en algún régimen.
+        def exige(t):
+            return bool(t[0]) or any(a.startswith("A-03") for a in t[1])
+
+        codigo = 1 if exige(self.completo) or exige(self.simplificado) else 0
         return {"completo": r(self.completo), "simplificado": r(self.simplificado), "codigo_salida": codigo}
 
 
@@ -226,52 +230,87 @@ def _sin_evidencias(e):
     _c(e)["pruebas"][0]["evidencias"] = []
 
 
+def _pruebas_tras_emergencia(e):
+    for p in _c(e)["pruebas"]:
+        p["fecha"] = "2026-11-09T23:30:00+01:00"
+
+
+def _revertido_sin_verificar(e):
+    c = _c(e)
+    c["implantacion"]["resultado"] = "revertido"
+    c["vuelta_atras"]["ejecucion"] = {"actores": ["P-3"], "fecha": "2026-11-09T10:00:00+01:00", "motivo": "Motivo de ejemplo (inventado)"}
+    c["verificacion_posterior"] = None
+
+
+def _verificacion_previa(e):
+    _c(e)["verificacion_posterior"]["fecha"] = "2026-11-09T09:00:00+01:00"
+
+
+def _prueba_sin_autor(e):
+    _c(e)["pruebas"][0]["realizada_por"] = []
+
+
+def _sin_seguimiento(e):
+    _c(e)["revisiones_codigo"][0]["seguimiento"] = []
+
+
 I2 = ("I-02",)
 I12 = ("I-01", "I-02")
 NADA = ((), (), ())
 
+
+def _a(*requisitos):
+    """Avisos de lectura propia (A-03), uno por requisito."""
+    return tuple(f"A-03 {r}" for r in requisitos)
+
+
 CASOS = (
     Caso("01-base-limpia", "—", "Base limpia, sin incumplimientos ni avisos.", base_limpia, _nada, NADA, ((), (), I2)),
-    Caso("02-art-17-1-encabezado-sin-elementos", "Art. 17.1, encabezado; DORA, art. 9.4.e)", "No dice qué se cambia.", base_limpia, _poner(elementos=[]), (("R-02",), (), ()), ((), (), I2)),
-    Caso("03-art-21-c-art-33-b-implantador-sin-cuenta", "Art. 21.c); art. 33.b)", "El agente que implanta no tiene cuenta.", base_limpia, _sin_cuenta_el_agente, (("R-03",), (), ()), (("R-03",), (), I2)),
-    Caso("04-art-17-1-b-d-1-misma-persona-solicita-y-aprueba", "Art. 17.1.b); D-1", "La misma persona solicita y aprueba; en el simplificado es solo informativo.", base_limpia, lambda e: _c(e)["solicitud"].update(actores=["P-2"]), (("R-05",), (), ()), ((), (), I12)),
-    Caso("05-art-17-1-b-considerando-17-d-1-misma-funcion", "Art. 17.1.b); considerando 17; D-1", "Solicita una persona distinta de la misma función que aprueba.", base_limpia, _misma_funcion, (("R-05",), (), ()), ((), (), I12)),
-    Caso("06-art-17-1-b-d-1-aprueba-el-responsable-del-agente", "Art. 17.1.b); D-1", "Aprueba la persona responsable del agente que implanta.", base_limpia, lambda e: _c(e)["aprobacion"].update(actores=["P-3"]), (("R-05",), (), ()), ((), (), I12)),
-    Caso("07-art-17-1-c-iv-aseguramiento-de-calidad-sin-asignar", "Art. 17.1.c.iv)", "Nadie tiene asignado el aseguramiento de la calidad.", base_limpia, lambda e: _c(e)["responsabilidades"].update(aseguramiento_calidad=[]), (("R-06",), (), ()), ((), (), I2)),
+    Caso("02-art-17-1-d-i-sin-elementos", "Art. 17.1.d.i); art. 17.1, encabezado", "No dice qué se cambia: incumplimiento en el completo.", base_limpia, _poner(elementos=[]), (("R-02",), (), ()), ((), (), I2)),
+    Caso("03-art-21-c-art-33-b-aviso-di-2-implantador-sin-cuenta", "Arts. 21.c) y 33.b); modelo §3.1; DI-2", "El agente que implanta no tiene cuenta. Registrar la cuenta lo pide el modelo: aviso en los dos regímenes.", base_limpia, _sin_cuenta_el_agente, ((), _a("R-03"), ()), ((), _a("R-03"), I2)),
+    Caso("04-art-17-1-b-d-1-misma-persona-solicita-y-aprueba", "Art. 17.1.b); D-1", "El mismo actor solicita y aprueba: incumplimiento que sostiene el texto. En el simplificado es solo informativo.", base_limpia, lambda e: _c(e)["solicitud"].update(actores=["P-2"]), (("R-05",), (), ()), ((), (), I12)),
+    Caso("05-art-17-1-b-aviso-d-1-considerando-17-misma-funcion", "Art. 17.1.b); considerando 17; D-1", "Solicita otra persona de la misma función que aprueba: sin indicio, con aviso de la D-1.", base_limpia, _misma_funcion, ((), _a("R-05"), ()), ((), (), I12)),
+    Caso("06-art-17-1-b-aviso-d-1-aprueba-el-responsable-del-agente", "Art. 17.1.b); D-1; modelo §3.2", "Aprueba la persona responsable del agente que implanta: sin indicio, con aviso de la D-1.", base_limpia, lambda e: _c(e)["aprobacion"].update(actores=["P-3"]), ((), _a("R-05"), ()), ((), (), I12)),
+    Caso("07-art-17-1-c-iv-aviso-modelo-5-1-aseguramiento-de-calidad-sin-asignar", "Art. 17.1.c.iv); modelo §5.1", "Nadie tiene asignado el aseguramiento de la calidad en el registro: sin indicio, con aviso.", base_limpia, lambda e: _c(e)["responsabilidades"].update(aseguramiento_calidad=[]), ((), _a("R-06"), ()), ((), (), I2)),
     Caso("08-art-17-1-d-i-sin-objeto", "Art. 17.1.d.i); dudas, DI-1", "El objeto es una cadena vacía.", base_limpia, _poner(objeto=""), (("R-07",), (), ()), ((), (), I2)),
     Caso("09-art-17-1-d-iii-sin-resultados-esperados", "Art. 17.1.d.iii)", "Faltan los resultados esperados.", base_limpia, _poner(resultados_esperados=" "), (("R-09",), (), ()), ((), (), I2)),
     Caso("10-art-17-1-d-sin-comunicaciones", "Art. 17.1.d), encabezado", "No se comunicaron los detalles.", base_limpia, _poner(comunicaciones=[]), (("R-10",), (), ()), ((), (), I2)),
     Caso("11-art-17-1-a-sin-verificacion-de-seguridad", "Art. 17.1.a)", "No se verificaron los requisitos de seguridad.", base_limpia, _poner(verificacion_seguridad=None), (("R-11",), (), ()), ((), (), I2)),
-    Caso("12-art-17-1-a-di-3-verificacion-negativa-y-aplicado", "Art. 17.1.a); dudas, DI-3", "La verificación da no_cumple y el cambio se aplica.", base_limpia, _verificacion_negativa, (("R-11",), (), ()), ((), (), I2)),
+    Caso("12-art-17-1-a-aviso-di-3-verificacion-negativa-y-aplicado", "Art. 17.1.a); dudas, DI-3", "La verificación da no_cumple y el cambio se aplica: aviso.", base_limpia, _verificacion_negativa, ((), _a("R-11"), ()), ((), (), I2)),
     Caso("13-dora-art-9-4-e-art-38-2-sin-evaluacion", "DORA, art. 9.4.e); art. 38.2", "No se evaluó el cambio.", base_limpia, _poner(evaluacion=None), (("R-12",), (), ()), (("R-12",), (), I2)),
-    Caso("14-art-17-1-h-medidas-adicionales-sin-detallar", "Art. 17.1.h)", "Hacen falta medidas adicionales y no se dice cuáles.", base_limpia, _medidas_sin_detallar, (("R-12",), (), ()), ((), (), I2)),
+    Caso("14-art-17-1-h-aviso-modelo-6-2-medidas-adicionales-sin-detallar", "Art. 17.1.h); modelo §6.2", "Hacen falta medidas adicionales y no se dice cuáles: aviso.", base_limpia, _medidas_sin_detallar, ((), _a("R-12"), ()), ((), (), I2)),
     Caso("15-art-31-1-e-cambio-importante-sin-riesgos", "Art. 31.1.e)", "Cambio importante sin evaluación de riesgos: solo simplificado.", base_limpia, _importante_sin_riesgos, NADA, (("R-13",), (), I2)),
-    Caso("16-art-31-1-e-sin-declarar-si-es-importante", "Art. 31.1.e)", "La entidad no declara si el cambio es importante: solo simplificado.", base_limpia, _poner(cambio_importante=None), NADA, (("R-13",), (), I2)),
+    Caso("16-art-31-1-e-aviso-modelo-4-sin-declarar-si-es-importante", "Art. 31.1.e); modelo §4", "La entidad no declara si el cambio es importante: aviso, solo simplificado.", base_limpia, _poner(cambio_importante=None), NADA, ((), _a("R-13"), I2)),
     Caso("17-art-16-2-art-37-b-pruebas-posteriores-a-la-implantacion", "Art. 16.2; art. 37.b)", "Todas las pruebas son posteriores a la implantación.", base_limpia, _pruebas_tardias, (("R-14",), (), ()), (("R-14",), (), I2)),
     Caso("18-art-16-2-art-37-b-sin-pruebas", "Art. 16.2; art. 37.b); dudas, DI-8", "No hay pruebas.", base_limpia, _poner(pruebas=[]), (("R-14",), (), ()), (("R-14",), (), I2)),
     Caso("19-art-16-4-seguridad-de-paquetes-en-produccion", "Art. 16.4", "La prueba de seguridad de paquetes se hace en producción.", base_limpia, _paquetes_en_produccion, (("R-15",), (), ()), ((), (), I2)),
-    Caso("20-emergencia-bien-registrada-d-5-art-37-b-simplificado", "Art. 37.b); D-5", "Parche de emergencia bien registrado: el completo no tiene incumplimientos; el simplificado no admite excepción de emergencia.", base_emergencia, _nada, NADA, (("R-23",), (), I2)),
+    Caso("20-emergencia-bien-registrada-art-37-b-simplificado-d-5", "Art. 37.b); D-5", "Parche de emergencia bien registrado: el completo no tiene incumplimientos; el simplificado incumple el art. 37.b) literal (la D-5 documenta la lectura alternativa).", base_emergencia, _nada, NADA, (("R-23",), (), I2)),
     Caso("21-art-16-5-a-datos-de-produccion-sin-excepcion", "Art. 16.5.a)", "Una prueba fuera de producción usa datos de producción sin excepción.", base_limpia, _datos_produccion, (("R-16",), (), ()), ((), (), I2)),
-    Caso("22-art-16-6-d-4-excepcion-aprobada-solo-por-un-agente", "Art. 16.6; D-4", "La excepción de datos de producción la aprueba solo un agente.", base_limpia, _excepcion_de_agente, (("R-16",), (), ()), ((), (), I2)),
-    Caso("23-art-16-3-sin-revision-dinamica", "Art. 16.3", "Ninguna revisión usa la técnica dinámica.", base_limpia, _sin_dinamica, (("R-17",), (), ()), ((), (), I2)),
-    Caso("24-art-16-3-b-d-2-plan-adoptado-solo-por-un-agente", "Art. 16.3.b); D-2, punto 2", "El plan de acción lo adopta solo un agente.", base_limpia, _plan_de_agente, (("R-18",), (), ()), ((), (), I2)),
+    Caso("22-art-16-6-aviso-d-4-excepcion-aprobada-solo-por-un-agente", "Art. 16.6; D-4", "La excepción de datos de producción la aprueba solo un agente: aviso.", base_limpia, _excepcion_de_agente, ((), _a("R-16"), ()), ((), (), I2)),
+    Caso("23-art-16-3-aviso-modelo-7-2-sin-revision-dinamica", "Art. 16.3; modelo §7.2", "Ninguna revisión usa la técnica dinámica: aviso.", base_limpia, _sin_dinamica, ((), _a("R-17"), ()), ((), (), I2)),
+    Caso("24-art-16-3-b-aviso-d-2-plan-adoptado-solo-por-un-agente", "Art. 16.3.b); D-2, punto 2", "El plan de acción lo adopta solo un agente: aviso.", base_limpia, _plan_de_agente, ((), _a("R-18"), ()), ((), (), I2)),
     Caso("25-art-16-3-b-hallazgo-sin-medida", "Art. 16.3.b)", "Un hallazgo sin medida en el plan de acción.", base_limpia, _hallazgo_sin_medida, (("R-18",), (), ()), ((), (), I2)),
-    Caso("26-art-16-3-c-d-2-seguimiento-solo-por-un-agente", "Art. 16.3.c); D-2, punto 3", "El seguimiento lo hace solo un agente.", base_limpia, _seguimiento_de_agente, (("R-19",), (), ()), ((), (), I2)),
-    Caso("27-art-16-7-codigo-sin-origen", "Art. 16.7", "El cambio incluye código y no declara su origen.", base_limpia, _poner(origen_codigo=[]), (("R-20",), (), ()), ((), (), I2)),
+    Caso("26-art-16-3-c-aviso-d-2-seguimiento-solo-por-un-agente", "Art. 16.3.c); D-2, punto 3", "El seguimiento lo hace solo un agente: aviso.", base_limpia, _seguimiento_de_agente, ((), _a("R-19"), ()), ((), (), I2)),
+    Caso("27-art-16-7-aviso-d-3-codigo-sin-origen", "Arts. 16.7 y 16.8; D-3", "El cambio incluye código y no declara su origen: aviso.", base_limpia, _poner(origen_codigo=[]), ((), _a("R-20"), ()), ((), (), I2)),
     Caso("28-art-16-8-d-3-codigo-abierto-revisado-despues", "Art. 16.8; D-3", "Código abierto revisado después de la implantación.", base_limpia, _abierto_revisado_despues, (("R-21",), (), ()), ((), (), I2)),
-    Caso("29-art-16-1-c-art-37-c-sin-controles-de-integridad", "Art. 16.1.c); art. 37.c)", "No hay medidas contra la alteración o la manipulación.", base_limpia, _poner(controles_integridad=[]), (("R-22",), (), ()), (("R-22",), (), I2)),
-    Caso("30-dora-art-9-4-e-art-37-b-aprobacion-posterior-a-la-implantacion", "DORA, art. 9.4.e); art. 37.b)", "La aprobación es posterior a la implantación.", base_limpia, _aprobacion_tardia, (("R-23",), (), ()), (("R-23",), (), I2)),
-    Caso("31-art-37-b-d-4-aprobacion-solo-por-un-agente", "Art. 37.b); D-4", "Aprueba solo un agente.", base_limpia, _aprobacion_de_agente, (("R-23",), (), ()), (("R-23",), (), I2)),
+    Caso("29-art-16-1-c-art-37-c-aviso-modelo-6-3-sin-controles-de-integridad", "Art. 16.1.c); art. 37.c); modelo §6.3", "No hay medidas contra la manipulación en el registro: sin indicio, con aviso en los dos regímenes.", base_limpia, _poner(controles_integridad=[]), ((), _a("R-22"), ()), ((), _a("R-22"), I2)),
+    Caso("30-dora-art-9-4-e-art-37-b-aprobacion-posterior-a-la-implantacion", "DORA, art. 9.4.e); art. 16.2; art. 37.b)", "La aprobación es posterior a la implantación.", base_limpia, _aprobacion_tardia, (("R-23",), (), ()), (("R-23",), (), I2)),
+    Caso("31-art-37-b-aviso-d-4-aprobacion-solo-por-un-agente", "Art. 37.b); D-4", "Aprueba solo un agente: aviso en los dos regímenes.", base_limpia, _aprobacion_de_agente, ((), _a("R-23"), ()), ((), _a("R-23"), I2)),
     Caso("32-dora-art-9-4-e-art-37-b-sin-aprobacion", "DORA, art. 9.4.e); art. 37.b); dudas, DI-9", "Sin aprobación y sin emergencia.", base_limpia, _poner(aprobacion=None), (("R-23",), (), ()), (("R-23",), (), I2)),
     Caso("33-art-17-1-e-sin-vuelta-atras", "Art. 17.1.e)", "No hay procedimiento de vuelta atrás.", base_limpia, _poner(vuelta_atras=None), (("R-25",), (), ()), ((), (), I2)),
-    Caso("34-art-17-1-e-revertido-sin-ejecucion", "Art. 17.1.e)", "El cambio se revirtió y no consta cómo.", base_limpia, _revertido_sin_ejecucion, (("R-25",), (), ()), ((), (), I2)),
-    Caso("35-art-17-1-f-emergencia-sin-salvaguardias", "Art. 17.1.f)", "Cambio de emergencia sin salvaguardias.", base_emergencia, _sin_salvaguardias, (("R-26",), (), ()), (("R-23",), (), I2)),
-    Caso("36-art-17-1-g-di-6-revision-posterior-pendiente", "Art. 17.1.g); dudas, DI-6", "Falta la aprobación posterior del cambio de emergencia.", base_emergencia, _revision_pendiente, (("R-27",), (), ()), (("R-23",), (), I2)),
+    Caso("34-art-17-1-e-aviso-modelo-8-revertido-sin-ejecucion", "Art. 17.1.e); modelo §8", "El cambio se revirtió y no consta cómo: aviso.", base_limpia, _revertido_sin_ejecucion, ((), _a("R-25"), ()), ((), (), I2)),
+    Caso("35-art-17-1-f-aviso-modelo-9-emergencia-sin-salvaguardias", "Art. 17.1.f); modelo §9", "Cambio de emergencia sin salvaguardias en el registro: sin indicio, con aviso.", base_emergencia, _sin_salvaguardias, ((), _a("R-26"), ()), (("R-23",), (), I2)),
+    Caso("36-art-17-1-g-aviso-di-6-revision-posterior-pendiente", "Art. 17.1.g); dudas, DI-6", "Falta la aprobación posterior del cambio de emergencia: pendiente, aviso.", base_emergencia, _revision_pendiente, ((), _a("R-27"), ()), (("R-23",), (), I2)),
     Caso("37-art-17-1-g-reexamen-anterior-a-la-aplicacion", "Art. 17.1.g)", "El reexamen es anterior a la aplicación.", base_emergencia, _reexamen_previo, (("R-27",), (), ()), (("R-23",), (), I2)),
-    Caso("38-art-17-1-g-d-4-aprobacion-posterior-solo-por-un-agente", "Art. 17.1.g); D-4", "La aprobación posterior la da solo un agente.", base_emergencia, _aprobacion_posterior_de_agente, (("R-27",), (), ()), (("R-23",), (), I2)),
-    Caso("39-dora-art-9-4-e-art-38-2-sin-verificacion-posterior", "DORA, art. 9.4.e); art. 38.2", "No se verificó el cambio.", base_limpia, _poner(verificacion_posterior=None), (("R-28",), (), ()), (("R-28",), (), I2)),
-    Caso("40-art-17-1-c-iv-d-2-aviso-autorrevision", "Art. 17.1.c.iv); D-2, punto 4", "Revisa otro agente con la misma herramienta, modelo y versión que el que implanta: aviso, no incumplimiento.", base_limpia, _autorrevision_otra_instancia, ((), ("A-01",), ()), ((), (), I2)),
-    Caso("41-modelo-7-3-aviso-sin-evidencias", "DORA, art. 9.4.e); art. 38.2; modelo, §7.3", "Una prueba sin evidencias: aviso en los dos regímenes.", base_limpia, _sin_evidencias, ((), ("A-02",), ()), ((), ("A-02",), I2)),
+    Caso("38-art-17-1-g-aviso-d-4-aprobacion-posterior-solo-por-un-agente", "Art. 17.1.g); D-4", "La aprobación posterior la da solo un agente: aviso.", base_emergencia, _aprobacion_posterior_de_agente, ((), _a("R-27"), ()), (("R-23",), (), I2)),
+    Caso("39-dora-art-9-4-e-art-38-2-sin-verificacion-posterior", "DORA, art. 9.4.e); art. 38.2", "No se verificó un cambio aplicado.", base_limpia, _poner(verificacion_posterior=None), (("R-28",), (), ()), (("R-28",), (), I2)),
+    Caso("40-art-17-1-c-iv-d-2-aviso-autorrevision", "Art. 17.1.c.iv); D-2, punto 4", "Revisa otro agente con la misma herramienta, modelo y versión que el que implanta: aviso A-01, no exige actuar.", base_limpia, _autorrevision_otra_instancia, ((), ("A-01",), ()), ((), (), I2)),
+    Caso("41-modelo-7-3-aviso-sin-evidencias", "DORA, art. 9.4.e); art. 38.2; modelo, §7.3", "Una prueba sin evidencias: aviso A-02 en los dos regímenes, no exige actuar.", base_limpia, _sin_evidencias, ((), ("A-02",), ()), ((), ("A-02",), I2)),
+    Caso("42-art-16-2-aviso-di-4-emergencia-sin-pruebas-previas", "Art. 16.2; art. 37.b); dudas, DI-4; D-5", "Cambio de emergencia sin pruebas previas: aviso en el completo (DI-4); incumplimiento del art. 37.b) literal en el simplificado.", base_emergencia, _pruebas_tras_emergencia, ((), _a("R-14"), ()), (("R-14", "R-23"), (), I2)),
+    Caso("43-dora-art-9-4-e-aviso-di-10-revertido-sin-verificacion", "DORA, art. 9.4.e); art. 38.2; dudas, DI-10", "Cambio revertido sin verificación posterior: aviso en los dos regímenes.", base_limpia, _revertido_sin_verificar, ((), _a("R-28"), ()), ((), _a("R-28"), I2)),
+    Caso("44-dora-art-9-4-e-aviso-modelo-10-verificacion-anterior-a-la-implantacion", "DORA, art. 9.4.e); art. 38.2; modelo §10", "La verificación posterior es anterior a la implantación: aviso en los dos regímenes.", base_limpia, _verificacion_previa, ((), _a("R-28"), ()), ((), _a("R-28"), I2)),
+    Caso("45-art-21-c-art-33-b-aviso-di-8-prueba-sin-autor", "Arts. 21.c) y 33.b); modelo §7.1; DI-8", "Una prueba no dice quién la hizo: aviso en los dos regímenes.", base_limpia, _prueba_sin_autor, ((), _a("R-03"), ()), ((), _a("R-03"), I2)),
+    Caso("46-art-16-3-c-sin-seguimiento", "Art. 16.3.c)", "El plan de acción no tiene seguimiento.", base_limpia, _sin_seguimiento, (("R-19",), (), ()), ((), (), I2)),
 )
 
 
@@ -281,7 +320,7 @@ def resumen(inf_dict):
     for regimen, r in inf_dict["regimenes"].items():
         out[regimen] = {
             "incumplimientos": r["incumplimientos"],
-            "avisos": [a["codigo"] for a in r["avisos"]],
+            "avisos": [f"{a['codigo']} {a['requisito']}" if a["codigo"] == "A-03" else a["codigo"] for a in r["avisos"]],
             "informativos": [a["codigo"] for a in r["informativos"]],
         }
     out["codigo_salida"] = inf_dict["codigo_salida"]
@@ -329,10 +368,11 @@ def readme() -> str:
         "python corpus/generar.py",
         "```",
         "",
-        "Cada caso rompe un solo requisito o provoca un solo aviso, y su nombre lleva el artículo que rompe. Parte de una "
-        "base limpia (el ejemplo del §1.1 de `docs/modelo-datos.md`, con la revisión estática hecha por una persona) o de "
-        "una base de emergencia (el §1.2, con la verificación posterior tras la implantación; `docs/dudas-implementacion.md`, "
-        "DI-7). `I-02` aparece en el simplificado de todos los casos porque todos tienen revisiones de código, que el "
+        "Cada caso rompe un solo requisito o provoca un solo aviso, y su nombre lleva el artículo que rompe. Si el resultado "
+        "es un aviso de lectura propia (A-03, modelo §0.1 bis), el nombre lleva además «aviso» y la lectura de la que sale. "
+        "Parte de una base limpia (el ejemplo del §1.1 de `docs/modelo-datos.md`, con la revisión estática hecha por una "
+        "persona) o de una base de emergencia (el ejemplo del §1.2). El código de salida es 1 si hay un incumplimiento o un "
+        "A-03 en algún régimen. `I-02` aparece en el simplificado de todos los casos porque todos tienen revisiones de código, que el "
         "título III no exige.",
         "",
         "| Caso | Artículo | Completo | Simplificado | Código |",

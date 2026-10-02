@@ -32,18 +32,18 @@ def test_ejemplo_1_1_cambio_ordinario():
 
 
 def test_ejemplo_1_2_parche_de_emergencia():
-    # §1.2 compuesto literalmente: R-23 en el simplificado por el D-5, que es lo que
-    # el ejemplo muestra, y R-28 en los dos, porque conserva la verificación
-    # posterior del §1.1, anterior a la implantación de emergencia (dudas, DI-7).
+    # §1.2: sin incumplimientos en el completo; en el simplificado, R-23 por el art. 37.b)
+    # literal, que es lo que el ejemplo muestra (D-5). El modelo corrigió el ejemplo:
+    # ya no hereda una verificación anterior a la implantación (dudas, DI-7).
     assert _resumen("1.2") == {
-        "completo": {"incumplimientos": ["R-28"], "avisos": ["A-01"], "informativos": []},
-        "simplificado": {"incumplimientos": ["R-23", "R-28"], "avisos": [], "informativos": ["I-02"]},
+        "completo": {"incumplimientos": [], "avisos": ["A-01"], "informativos": []},
+        "simplificado": {"incumplimientos": ["R-23"], "avisos": [], "informativos": ["I-02"]},
         "codigo_salida": 1,
     }
 
 
 def test_ejemplo_d_1_misma_persona_solicita_y_aprueba():
-    # D-1: incumplimiento en el completo (sin matices: coincide la persona);
+    # D-1: incumplimiento en el completo (lo sostiene el texto: es el mismo actor);
     # dato informativo en el simplificado.
     assert _resumen("D-1") == {
         "completo": {"incumplimientos": ["R-05"], "avisos": ["A-01"], "informativos": []},
@@ -53,4 +53,4 @@ def test_ejemplo_d_1_misma_persona_solicita_y_aprueba():
     completo = como_dict(informe(carga_de(EJEMPLOS["D-1"])))["regimenes"]["completo"]
     r05 = next(r for r in completo["requisitos"] if r["id"] == "R-05")
     assert any("Ninguna lectura lo salva" in n for n in r05["notas"])
-    assert any("P-2 aprueba" in m and "P-2 solicita" in m for m in r05["motivos"])
+    assert any("P-2 aprueba" in m and "también solicita" in m for m in r05["motivos"])

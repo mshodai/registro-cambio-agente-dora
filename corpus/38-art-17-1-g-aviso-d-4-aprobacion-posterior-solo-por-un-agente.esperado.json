@@ -1,13 +1,13 @@
 {
-  "caso": "31-art-37-b-d-4-aprobacion-solo-por-un-agente",
-  "articulo": "Art. 37.b); D-4",
-  "descripcion": "Aprueba solo un agente.",
+  "caso": "38-art-17-1-g-aviso-d-4-aprobacion-posterior-solo-por-un-agente",
+  "articulo": "Art. 17.1.g); D-4",
+  "descripcion": "La aprobación posterior la da solo un agente: aviso.",
   "resultado": {
     "completo": {
-      "incumplimientos": [
-        "R-23"
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-27"
       ],
-      "avisos": [],
       "informativos": []
     },
     "simplificado": {

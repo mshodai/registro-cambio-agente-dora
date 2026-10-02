@@ -1,0 +1,22 @@
+{
+  "caso": "20-emergencia-bien-registrada-art-37-b-simplificado-d-5",
+  "articulo": "Art. 37.b); D-5",
+  "descripcion": "Parche de emergencia bien registrado: el completo no tiene incumplimientos; el simplificado incumple el art. 37.b) literal (la D-5 documenta la lectura alternativa).",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [
+        "R-23"
+      ],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

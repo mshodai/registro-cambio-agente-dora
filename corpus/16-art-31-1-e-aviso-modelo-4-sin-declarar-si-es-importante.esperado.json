@@ -1,0 +1,22 @@
+{
+  "caso": "16-art-31-1-e-aviso-modelo-4-sin-declarar-si-es-importante",
+  "articulo": "Art. 31.1.e); modelo §4",
+  "descripcion": "La entidad no declara si el cambio es importante: aviso, solo simplificado.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-13"
+      ],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

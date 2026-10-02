@@ -1,0 +1,22 @@
+{
+  "caso": "07-art-17-1-c-iv-aviso-modelo-5-1-aseguramiento-de-calidad-sin-asignar",
+  "articulo": "Art. 17.1.c.iv); modelo §5.1",
+  "descripcion": "Nadie tiene asignado el aseguramiento de la calidad en el registro: sin indicio, con aviso.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-06"
+      ],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}
