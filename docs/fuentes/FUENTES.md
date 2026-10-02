@@ -10,9 +10,9 @@ Son tres textos publicados en el Diario Oficial de la Unión Europea, que son lo
   - el **título III**, «Marco simplificado de gestión del riesgo relacionado con las TIC a que se refiere el artículo 16, apartado 1, del Reglamento (UE) 2022/2554» (arts. 28 a 41).
 - **Corrección de errores del Reglamento Delegado (UE) 2024/1774** en su versión española (DO L 2025/90420, de 15.5.2025).
 
-**Versiones consolidadas.** Ninguno de los dos reglamentos tiene una versión consolidada que incorpore modificaciones. Se comprobó el 2026-10-02 con la misma consulta SPARQL al [Cellar](https://publications.europa.eu/webapi/rdf/sparql) de la Oficina de Publicaciones que usa `vigilancia-fuentes` (`consulta_cellar` en `vigilancia_fuentes.py`):
+**Versiones consolidadas.** Ninguno de los dos reglamentos tiene una versión consolidada que incorpore modificaciones. Se comprobó el 2026-10-02 con una consulta SPARQL al [Cellar](https://publications.europa.eu/webapi/rdf/sparql) de la Oficina de Publicaciones, de donde salen los metadatos de EUR-Lex. La consulta pide, para cada acto, su CELEX, sus fechas de entrada en vigor y sus versiones consolidadas con su fecha:
 
-- **Una sola versión consolidada por reglamento.** El Cellar solo da una para cada uno: `02022R2554-20221227` para DORA y `02024R1774-20240625` para el Reglamento Delegado. Las dos llevan la fecha de publicación del original en el Diario Oficial. Es la versión consolidada inicial, que coincide con el propio texto original. Por eso no se ha descargado: se cita el original, y `vigilancia-fuentes` sigue vigilando el acto a través de él. Si aparece una versión consolidada posterior, la tratará como un cambio.
+- **Una sola versión consolidada por reglamento.** El Cellar solo da una para cada uno: `02022R2554-20221227` para DORA y `02024R1774-20240625` para el Reglamento Delegado. Las dos llevan la fecha de publicación del original en el Diario Oficial. Es la versión consolidada inicial, que coincide con el propio texto original. Por eso no se ha descargado: se cita el original, y la vigilancia automática (última sección) sigue vigilando el acto a través de él. Si aparece una versión consolidada posterior, la tratará como un cambio.
 - **Sin actos modificativos.** El Cellar no registra ningún acto que modifique a ninguno de los dos (`cdm:resource_legal_amends_resource_legal`).
 - **Rectificaciones no incorporadas.** Sí registra rectificaciones (`cdm:resource_legal_corrects_resource_legal`), que no están incorporadas a ninguna versión consolidada:
   - DORA: nueve, de `32022R2554R(01)` a `32022R2554R(09)`. Según el Cellar, **ninguna tiene versión en español**. Afectan a otras versiones lingüísticas y no se han descargado.
@@ -43,9 +43,8 @@ El art. 22 pertenece al título II (régimen completo), capítulo III, «Detecci
 
 **Casos que este documento no resuelve:**
 
-- **Corrección de errores sin vigilancia automática.** `vigilancia-fuentes` no la puede comprobar como acto de EUR-Lex. Con la URL citada (`uri=CELEX:32024R1774R(02)`), su función `acto_eurlex` no la reconoce como acto, porque el sufijo `R(02)` no encaja en el patrón de CELEX. Con la otra URL de EUR-Lex (`uri=OJ:L_202590420`), el Cellar sí la encuentra, pero no le da fecha de entrada en vigor. En los dos casos el script la dará como «no comprobable». Se cita la URL por CELEX porque es la que corresponde al nombre del fichero. Este repositorio no modifica `vigilancia-fuentes`.
-- **Repositorio no vigilado aún.** `vigilancia-fuentes` vigila por defecto cinco repositorios, y este no está entre ellos. Hasta que se añada, sus fuentes solo se vigilan si se ejecuta el script pasando este repositorio de forma explícita.
-- **Dos fechas de entrada en vigor de DORA.** El Cellar da dos: 2023-01-16 y 2025-01-17. La primera es la entrada en vigor del art. 64 («a los veinte días de su publicación»). La segunda coincide con la fecha de aplicación. No se ha investigado por qué el Cellar registra las dos. `vigilancia-fuentes` toma la menor.
+- **Corrección de errores sin vigilancia automática.** La vigilancia automática no la puede comprobar como acto de EUR-Lex. Con la URL citada (`uri=CELEX:32024R1774R(02)`), no se reconoce como acto, porque el sufijo `R(02)` no encaja en el patrón de CELEX. Con la otra URL de EUR-Lex (`uri=OJ:L_202590420`), el Cellar sí la encuentra, pero no le da fecha de entrada en vigor. En los dos casos queda como «no comprobable». Se cita la URL por CELEX porque es la que corresponde al nombre del fichero.
+- **Dos fechas de entrada en vigor de DORA.** El Cellar da dos: 2023-01-16 y 2025-01-17. La primera es la entrada en vigor del art. 64 («a los veinte días de su publicación»). La segunda coincide con la fecha de aplicación. No se ha investigado por qué el Cellar registra las dos. La vigilancia automática toma la menor.
 - **Rectificaciones de DORA en otras lenguas.** Las nueve rectificaciones de DORA no tienen versión en español según el Cellar. No se ha comprobado su contenido.
 
 ## Huellas SHA-256
@@ -62,7 +61,7 @@ Para comprobarlas: `cd docs/fuentes && shasum -a 256 -c` pegando el bloque anter
 
 ## Datos para la vigilancia automática
 
-Repite en formato legible por máquina el fichero, la URL de descarga y la huella SHA-256 de cada documento de las secciones anteriores. Lo lee el script de `vigilancia-fuentes`, que comprueba que coincida con el texto. Si difieren, prevalece el texto.
+Repite en formato legible por máquina el fichero, la URL de descarga y la huella SHA-256 de cada documento de las secciones anteriores. Lo lee un script de vigilancia automática de fuentes, que comprueba que coincida con el texto. Si difieren, prevalece el texto.
 
 ```json
 {
