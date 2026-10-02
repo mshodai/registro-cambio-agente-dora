@@ -56,6 +56,8 @@ Con el régimen simplificado, el modelo **exige solo lo que tiene base en el tí
 
 Esas entidades no pueden validar con este modelo el art. 17.2.
 
+**Candidato para una versión posterior.** El art. 17.2 y los párrafos segundo y tercero del art. 16.2 podrían entrar en una versión posterior del modelo, con un segundo parámetro de cálculo: el tipo de entidad. Ese parámetro iría junto al régimen y, como él, fuera de la entrada, porque es un hecho de la entidad y no del cambio (§0.1, principio 2). Con él, el cambio tendría que decir si es «significativo» (art. 17.2) y recoger las pruebas de tensión y las partes asociadas a ellas.
+
 **Requisitos de procedimiento y requisitos del registro.** Varias letras del art. 17.1 regulan el procedimiento de gestión de cambios, no cada cambio:
 
 - la b): «mecanismos para garantizar la independencia»;
@@ -509,9 +511,18 @@ Es el lugar donde las acciones del agente quedan como datos del registro (§0.2,
 
 Además, el agente puede crear un conflicto nuevo en el segundo lado. Un agente no tiene función propia: actúa en nombre de una función y responde de él una persona (§3.2). Si esa persona, o su función, es la que aprueba, el aprobador controla en la práctica la implantación.
 
+**Por qué un requisito del procedimiento se valida en un cambio concreto.** El §0.3 dice que la letra b) del art. 17.1 regula el procedimiento, no cada cambio, y que el registro no puede probar que el procedimiento existe. Aun así, un cambio en el que la misma persona solicita y aprueba se valida como incumplimiento, por esta razón:
+
+- **El mecanismo debe garantizar un resultado.** La letra b) no pide solo que haya mecanismos de independencia. Pide «mecanismos para garantizar la independencia». Un mecanismo que garantiza la independencia debe producirla en cada cambio al que se aplica, y la norma no prevé excepciones: el art. 17.1, encabezado, lo extiende a «todos los cambios».
+- **Un solo caso basta para refutarlo.** Si en un cambio la misma persona solicitó y aprobó, ese cambio demuestra que el mecanismo no garantizó la independencia en él. Puede ser que no existiera, que no cubriera ese caso o que alguien lo eludiera. El registro no dice cuál de las tres, pero no hace falta: las tres incumplen la letra b).
+- **El incumplimiento es de la entidad, no del cambio.** Lo que se incumple es el procedimiento de la entidad, y el registro de este cambio es la prueba. La salida lo dirá así: el registro muestra que el mecanismo del art. 17.1.b) no funcionó en este cambio.
+- **La prueba solo funciona en un sentido.** Un cambio sin coincidencias no demuestra que el mecanismo exista ni que funcione: puede ser casualidad. Por eso, sin coincidencias, la salida no dirá que el cambio «cumple» el art. 17.1.b). Dirá que no hay indicio de incumplimiento en este cambio, y que la existencia del mecanismo queda fuera de lo que el registro puede probar (§14).
+
+Este razonamiento vale sin matices cuando coincide la persona. Cuando son personas distintas de la misma `funcion`, solo vale si se acepta que una misma función no puede ser independiente de sí misma. Esa es la lectura del considerando 17, que el modelo adopta abajo y que la salida señala.
+
 **Lectura que adopta el modelo.** **[Decisión propia]**
 - **Régimen completo.** Para comprobar la independencia, cada agente cuenta con su propia `funcion` y también con la de su `persona_responsable`. Hay falta de independencia (art. 17.1.b) si alguna `funcion` de `aprobacion.actores` coincide con alguna de `solicitud.actores` o de `implantacion.actores`.
-  - **Misma persona.** Si la misma persona solicita y aprueba, la `funcion` coincide necesariamente, así que es siempre un incumplimiento. Ninguna lectura lo salva.
+  - **Misma persona.** Si la misma persona solicita y aprueba, la `funcion` coincide necesariamente, así que es siempre un incumplimiento, por la razón que se acaba de dar. Ninguna lectura lo salva.
   - **Personas distintas en la misma función.** El art. 17.1.b) habla de «mecanismos», y una entidad podría sostener que dos personas de la misma unidad son independientes. El considerando 17 pide funciones «separadas», y el modelo sigue al considerando: también es un incumplimiento. La salida dirá que esta parte depende de la lectura del considerando.
   - **Cambio de emergencia.** Se aplica lo mismo a `emergencia.revision_posterior.aprobacion`.
 - **Régimen simplificado.** No hay requisito. La coincidencia se da como dato informativo, no como incumplimiento.
