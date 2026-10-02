@@ -1,14 +1,18 @@
 """El informe: lo que se muestra en texto o en JSON.
 
 `informe` junta la carga y el cálculo de los regímenes pedidos. El código de
-salida es 1 si algún régimen calculado tiene algún incumplimiento: algo exige
-actuar. Los avisos y los datos informativos no lo cambian.
+salida es 1 si algo exige actuar en algún régimen calculado: un incumplimiento,
+que sostiene el texto, o un aviso de lectura propia (A-03), que dice que con
+esa lectura falta algo. Es el criterio de la serie: el 1 señala que alguna
+lectura exige actuar. Los avisos A-01 y A-02 y los datos informativos no lo
+cambian. El informe dice qué activó el 1.
 """
 
 import json
 from dataclasses import dataclass
 
 from registro_cambio.calculo import (
+    AVISO,
     CUMPLE,
     INCUMPLIMIENTO,
     NO_APLICA,
@@ -26,6 +30,7 @@ AVISO_LEGAL = (
 
 ETIQUETAS = {
     CUMPLE: "cumple",
+    AVISO: "aviso (lectura propia)",
     INCUMPLIMIENTO: "INCUMPLIMIENTO",
     SIN_INDICIO: "sin indicio de incumplimiento",
     NO_APLICA: "no aplica",
@@ -43,7 +48,7 @@ class Informe:
 
     @property
     def exige_actuar(self) -> bool:
-        return any(r.incumplimientos for r in self.regimenes)
+        return any(r.activadores for r in self.regimenes)
 
 
 def informe(carga: ResultadoCarga, regimenes=REGIMENES) -> Informe:
@@ -59,7 +64,16 @@ def codigo_de_salida(inf: Informe) -> int:
 
 
 def _aviso_dict(a):
-    return {"codigo": a.codigo, "mensaje": a.mensaje, "cita": a.cita}
+    d = {"codigo": a.codigo, "mensaje": a.mensaje, "cita": a.cita}
+    if a.requisito is not None:
+        d |= {"requisito": a.requisito, "lectura": a.lectura}
+    return d
+
+
+def _etiqueta(res):
+    if res.garantizado:
+        return "cumple: garantizado por la validación de entrada"
+    return ETIQUETAS[res.estado]
 
 
 def como_dict(inf: Informe) -> dict:
@@ -79,6 +93,7 @@ def como_dict(inf: Informe) -> dict:
                         "id": res.id,
                         "nombre": res.nombre,
                         "estado": res.estado,
+                        "garantizado": res.garantizado,
                         "cita": res.cita,
                         "motivos": list(res.motivos),
                         "notas": list(res.notas),
@@ -91,7 +106,10 @@ def como_dict(inf: Informe) -> dict:
             }
             for r in inf.regimenes
         },
-        "exige_actuar": inf.exige_actuar,
+        "exige_actuar": {
+            "valor": inf.exige_actuar,
+            "activado_por": {r.regimen: list(r.activadores) for r in inf.regimenes if r.activadores},
+        },
         "codigo_salida": codigo_de_salida(inf),
     }
 
@@ -109,19 +127,26 @@ def texto(inf: Informe) -> str:
     lineas = [f"Cambio {inf.carga.entrada.cambio.id}", "", AVISO_LEGAL]
     for r in inf.regimenes:
         lineas += ["", f"Régimen {r.regimen}:"]
-        n = len(r.incumplimientos)
-        lineas.append(f"  {n} incumplimiento{'s' if n != 1 else ''}.")
+        n, m_ = len(r.incumplimientos), len(r.avisos_de_lectura)
+        lineas.append(
+            f"  {n} incumplimiento{'s' if n != 1 else ''}; {m_} aviso{'s' if m_ != 1 else ''} de lectura propia."
+        )
         for res in r.resultados:
-            lineas.append(f"  {res.id} {res.nombre}: {ETIQUETAS[res.estado]} — {res.cita}")
+            lineas.append(f"  {res.id} {res.nombre}: {_etiqueta(res)} — {res.cita}")
+            if res.garantizado:
+                continue
             for m in res.motivos:
                 lineas.append(f"      {m}")
             for nota in res.notas:
                 lineas.append(f"      Nota: {nota}")
         if r.avisos:
-            lineas.append("  Avisos (no son incumplimientos):")
+            lineas.append("  Avisos (no son incumplimientos; A-03 viene de una lectura propia y exige actuar):")
             lineas += [f"    {a.codigo} {a.mensaje} ({a.cita})" for a in r.avisos]
         if r.informativos:
             lineas.append("  Datos informativos:")
             lineas += [f"    {a.codigo} {a.mensaje} ({a.cita})" for a in r.informativos]
     lineas += ["", f"Exige actuar: {'sí' if inf.exige_actuar else 'no'}."]
+    for r in inf.regimenes:
+        if r.activadores:
+            lineas.append(f"  {r.regimen}: {'; '.join(r.activadores)}")
     return "\n".join(lineas) + "\n"

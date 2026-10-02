@@ -8,8 +8,10 @@ from registro_cambio.carga import cargar_fichero
 from registro_cambio.salida import codigo_de_salida, como_json, informe, texto
 
 EPILOG = (
-    "códigos de salida: 1 si algún régimen calculado tiene algún incumplimiento, es decir, si algo exige "
-    "actuar; 0 si ninguno, aunque haya avisos; 2 si el fichero no se puede leer o la entrada no es válida."
+    "códigos de salida: 1 si algo exige actuar en algún régimen calculado: un incumplimiento que sostiene el "
+    "texto, o un aviso de lectura propia (A-03) que dice que con esa lectura falta algo; 0 si nada lo exige, "
+    "aunque haya avisos A-01 o A-02 o datos informativos; 2 si el fichero no se puede leer o la entrada no es "
+    "válida."
 )
 
 
