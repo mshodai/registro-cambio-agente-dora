@@ -1,0 +1,20 @@
+{
+  "ejemplo": "sin-revision",
+  "parte_de": "corpus/01-base-limpia.json",
+  "diferencia": "`cambio.revisiones_codigo` está vacía: el cambio incluye código fuente y no tiene ninguna revisión.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-03 R-17"
+      ],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": []
+    },
+    "codigo_salida": 1
+  }
+}

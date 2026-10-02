@@ -1,0 +1,26 @@
+{
+  "ejemplo": "flujo",
+  "parte_de": "corpus/06-art-17-1-b-aviso-d-1-aprueba-el-responsable-del-agente.json",
+  "diferencia": "`cambio.solicitud.actores` es `[\"P-3\"]`: la persona que responde del agente que implanta también encarga el cambio y lo aprueba.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-05"
+      ],
+      "avisos": [
+        "A-03 R-05"
+      ],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-01",
+        "I-01",
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}
