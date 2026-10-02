@@ -30,6 +30,17 @@ Convenciones:
 3. **La validación no depende del régimen.** **[Decisión propia]** Un hecho que un régimen no usa no es un error de entrada. Por ejemplo, el procedimiento de vuelta atrás de un cambio que se lee con el régimen simplificado.
 4. **Los casos no resueltos se documentan, no se resuelven en silencio.** Cuando un texto admite dos lecturas, el modelo recoge los hechos que distinguen una de otra y el §12 dice qué lectura adopta y por qué.
 
+### 0.1 bis. Qué puede concluir el validador
+
+Estos dos principios son **[Decisión propia]** y rigen cualquier cálculo que se haga con esta entrada.
+
+1. **Asimetría de los mecanismos (D-1).** Algunos requisitos dependen de un mecanismo de la entidad: la independencia del art. 17.1.b), las responsabilidades del art. 17.1.c), el procedimiento de emergencia del art. 17.1.f) y las medidas contra la manipulación de los arts. 16.1.c) y 37.c) (§0.3). Con ellos, el validador puede concluir «incumplimiento» o «sin indicio de incumplimiento», **nunca «cumple»**. El registro de un cambio puede probar que el mecanismo falló en ese cambio, pero no que existe (D-1).
+2. **Solo es incumplimiento lo que sostiene el texto.** El validador da «incumplimiento» solo cuando la conclusión resulta del texto de la norma aplicado al registro. Cuando depende de una lectura propia, el resultado es un **aviso** que remite a ella y dice qué faltaría con esa lectura. Son lecturas propias las decisiones D-n del §12, las demás marcas **[Decisión propia]** de este documento y las dudas de implementación. Una lectura propia puede tener buenas razones, pero no tiene la autoridad del texto. Y un registro no debe darse por incumplidor por una razón que la norma no da.
+
+Los dos principios se combinan. Si la falta de un requisito de mecanismo depende de una lectura propia, el resultado no es «incumplimiento», sino un aviso; y el requisito tampoco da «cumple», sino «sin indicio de incumplimiento». Por ejemplo, la independencia cuando solo coincide la función (D-1).
+
+Este principio prevalece sobre lo que dicen las decisiones del §12 y los demás apartados escritos antes que él. Donde dicen que una lectura propia da «incumplimiento», que algo «no cumple» o que algo «falta», el resultado es un aviso que remite a esa lectura.
+
 ### 0.2. Las tres reglas propias de este proyecto
 
 Estas reglas son **[Decisión propia]** y ningún cambio del modelo puede saltárselas.
@@ -242,9 +253,21 @@ Un parche aplicado fuera de horario por el procedimiento de emergencia, sin apro
     "inicio": "2026-11-09T23:10:00+01:00",
     "fin": "2026-11-09T23:25:00+01:00",
     "resultado": "aplicado"
-  }
+  },
+  "verificacion_posterior": {
+    "actores": ["P-3"],
+    "fecha": "2026-11-09T23:40:00+01:00",
+    "resultado": "conforme",
+    "descripcion": null
+  },
+  "acciones": [
+    { "actor": "AG-1", "fecha": "2026-11-09T23:10:00+01:00", "etapa": "implantacion", "descripcion": "Acción de ejemplo 1 (inventada)" },
+    { "actor": "AG-1", "fecha": "2026-11-09T23:25:00+01:00", "etapa": "implantacion", "descripcion": "Acción de ejemplo 2 (inventada)" }
+  ]
 }
 ```
+
+`verificacion_posterior` se repite porque debe ser posterior a la implantación (§10), y la del §1.1 es anterior a la de emergencia. `acciones` se repite porque las del §1.1 describen una implantación hecha por la mañana, no esta.
 
 ---
 
