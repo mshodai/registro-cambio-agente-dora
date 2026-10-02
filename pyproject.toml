@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "registro-cambio-agente-dora"
+version = "0.1.0"
+description = "Comprueba el registro de un cambio en un sistema de TIC en el que ha participado un agente de IA frente al art. 17 del Reglamento Delegado (UE) 2024/1774, en régimen completo y simplificado"
+requires-python = ">=3.11"
+
+[project.scripts]
+registro-cambio-agente = "registro_cambio.cli:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
