@@ -1,9 +1,7 @@
 ---
-title: "Borrador: qué puede demostrar el registro de un cambio hecho por un agente de IA"
-description: "Borrador. DORA y su Reglamento Delegado exigen que los cambios en los sistemas de TIC se aprueben con independencia de quien los solicita y los aplica. Un registro de cambios puede demostrar que ese control falló en un cambio concreto, pero nunca que existe. Qué dice el texto, qué no exige a cada cambio y qué pasa cuando la misma persona encarga, supervisa y aprueba el trabajo de un agente."
+title: "Qué puede demostrar el registro de un cambio hecho por un agente de IA"
+description: "DORA y su Reglamento Delegado exigen que los cambios en los sistemas de TIC se aprueben con independencia de quien los solicita y los aplica. Un registro de cambios puede demostrar que ese control falló en un cambio concreto, pero nunca que existe. Qué dice el texto, qué no exige a cada cambio y qué pasa cuando la misma persona encarga, supervisa y aprueba el trabajo de un agente."
 ---
-
-> **Borrador.** Este artículo está en revisión y puede cambiar antes de publicarse. Las citas y los resultados de la herramienta son reales; el texto no es definitivo.
 
 # Lo que un registro de cambios no puede demostrar: agentes de IA, independencia y DORA
 
@@ -64,7 +62,7 @@ El aviso sigue exigiendo actuar, y el código de salida es 1: con esa lectura fa
 
 La misma razón vale para quién revisa. Ni el art. 16 ni ningún otro artículo del Reglamento Delegado dicen que la revisión tenga que hacerla una persona. Si la hace un agente, la herramienta la cuenta como revisión del art. 16.3. Solo avisa si el agente que revisa es el mismo que implantó el cambio, y como aviso, no como incumplimiento.
 
-Hay un matiz. Según el modelo, el plan de acción ante las vulnerabilidades encontradas (art. 16.3.b: «adoptar un plan de acción para hacer frente a esas vulnerabilidades y anomalías») debe adoptarlo al menos una persona. Su seguimiento (art. 16.3.c) también debe incluir al menos a una persona. La razón es que un agente no puede ser titular de esa responsabilidad. Pero el art. 16.3 no dice quién adopta el plan ni quién lo sigue, así que también esto es una lectura propia (D-2), y la herramienta lo da como aviso, no como incumplimiento.
+Hay un matiz. Según el modelo, el plan de acción ante las vulnerabilidades encontradas (art. 16.3.b: «adoptar un plan de acción para hacer frente a esas vulnerabilidades y anomalías») debe adoptarlo al menos una persona. Su seguimiento (art. 16.3.c) también debe incluir al menos a una persona. El modelo lo razona así: un agente no puede ser titular de esa responsabilidad. Pero el art. 16.3 no dice quién adopta el plan ni quién lo sigue, así que también esto es una lectura propia (D-2), y la herramienta lo da como aviso, no como incumplimiento.
 
 ## El régimen simplificado no exige independencia
 
@@ -135,7 +133,7 @@ Para quien decide en una entidad sujeta al régimen completo, de lo anterior sal
 
 **Separar quién encarga un cambio y quién lo aprueba, en las funciones y en los permisos.** El art. 17.1.b) exige mecanismos que garanticen esa independencia, y el art. 21.b) ofrece dónde apoyarla: la separación de funciones en el control de acceso. Si una misma cuenta puede encargar el trabajo a un agente y aprobarlo, el mecanismo depende de que nadie lo use así.
 
-**Registrar cada cambio con sus actores, incluido el agente y quién responde de él.** DORA exige que todos los cambios «se registren» (art. 9.4.e), y el Reglamento Delegado, que los usuarios «sean identificables cuando realicen acciones en los sistemas de TIC» (art. 21.c). Un registro que diga qué agente hizo qué, y qué persona responde de él, es el único que permite ver después si la independencia se respetó.
+**Registrar cada cambio con sus actores, incluido el agente y quién responde de él.** DORA exige que todos los cambios «se registren» (art. 9.4.e), y el Reglamento Delegado, que los usuarios «sean identificables cuando realicen acciones en los sistemas de TIC» (art. 21.c). Un registro que diga qué agente hizo qué, y qué persona responde de él, es lo que permite ver después si la independencia se respetó.
 
 **No tomar como prueba de cumplimiento un «cumple» en requisitos que dependen de un mecanismo de la entidad.** La independencia (art. 17.1.b), las responsabilidades (art. 17.1.c), el procedimiento de emergencia (art. 17.1.f) y las medidas contra la manipulación (art. 16.1.c) se demuestran en el procedimiento, no en el registro de un cambio. Una herramienta que dé «cumple» en ellos dice más de lo que el registro contiene.
 
@@ -143,7 +141,7 @@ Para quien decide en una entidad sujeta al régimen completo, de lo anterior sal
 
 Un registro de cambios es una prueba de lo que pasó en cada cambio, no de cómo está organizada la entidad. Puede mostrar que un control falló; no puede mostrar que existe. **Una herramienta que dijera «cumple» sobre un requisito de procedimiento estaría certificando algo que el registro no contiene.**
 
-Los agentes de IA no cambian esa limitación, pero la hacen más frecuente. Cuando el trabajo lo hace una herramienta, es fácil que una sola persona encargue, supervise y apruebe, y que el flujo se sienta controlado porque cada paso queda registrado. El registro solo demuestra que alguien registró el cambio. La independencia que exige el art. 17.1.b) en el régimen completo no la da el agente: hay que configurarla en las funciones y los permisos de la entidad, y el registro de cada cambio dirá si se respetó.
+Los agentes de IA no cambian esa limitación, pero la hacen más frecuente. Cuando el trabajo lo hace una herramienta, es fácil que una sola persona encargue, supervise y apruebe, y que el flujo se sienta controlado porque cada paso queda registrado. El registro demuestra lo que pasó en cada cambio, no que el flujo esté controlado. La independencia que exige el art. 17.1.b) en el régimen completo no la da el agente: hay que configurarla en las funciones y los permisos de la entidad, y el registro de cada cambio dirá si se respetó.
 
 ---
 
