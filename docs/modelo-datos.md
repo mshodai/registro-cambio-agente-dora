@@ -39,8 +39,6 @@ Estos dos principios son **[Decisión propia]** y rigen cualquier cálculo que s
 
 Los dos principios se combinan. Si la falta de un requisito de mecanismo depende de una lectura propia, el resultado no es «incumplimiento», sino un aviso; y el requisito tampoco da «cumple», sino «sin indicio de incumplimiento». Por ejemplo, la independencia cuando solo coincide la función (D-1).
 
-Este principio prevalece sobre lo que dicen las decisiones del §12 y los demás apartados escritos antes que él. Donde dicen que una lectura propia da «incumplimiento», que algo «no cumple» o que algo «falta», el resultado es un aviso que remite a esa lectura.
-
 ### 0.2. Las tres reglas propias de este proyecto
 
 Estas reglas son **[Decisión propia]** y ningún cambio del modelo puede saltárselas.
@@ -541,14 +539,15 @@ Además, el agente puede crear un conflicto nuevo en el segundo lado. Un agente 
 - **El incumplimiento es de la entidad, no del cambio.** Lo que se incumple es el procedimiento de la entidad, y el registro de este cambio es la prueba. La salida lo dirá así: el registro muestra que el mecanismo del art. 17.1.b) no funcionó en este cambio.
 - **La prueba solo funciona en un sentido.** Un cambio sin coincidencias no demuestra que el mecanismo exista ni que funcione: puede ser casualidad. Por eso, sin coincidencias, la salida no dirá que el cambio «cumple» el art. 17.1.b). Dirá que no hay indicio de incumplimiento en este cambio, y que la existencia del mecanismo queda fuera de lo que el registro puede probar (§14).
 
-Este razonamiento vale sin matices cuando coincide la persona. Cuando son personas distintas de la misma `funcion`, solo vale si se acepta que una misma función no puede ser independiente de sí misma. Esa es la lectura del considerando 17, que el modelo adopta abajo y que la salida señala.
+Este razonamiento vale sin matices cuando coincide la persona. Cuando son personas distintas de la misma `funcion`, solo vale si se acepta que una misma función no puede ser independiente de sí misma. Esa es la lectura del considerando 17, que el modelo adopta abajo. Por eso ese caso da un aviso y no un incumplimiento.
 
-**Lectura que adopta el modelo.** **[Decisión propia]**
-- **Régimen completo.** Para comprobar la independencia, cada agente cuenta con su propia `funcion` y también con la de su `persona_responsable`. Hay falta de independencia (art. 17.1.b) si alguna `funcion` de `aprobacion.actores` coincide con alguna de `solicitud.actores` o de `implantacion.actores`.
-  - **Misma persona.** Si la misma persona solicita y aprueba, la `funcion` coincide necesariamente, así que es siempre un incumplimiento, por la razón que se acaba de dar. Ninguna lectura lo salva.
-  - **Personas distintas en la misma función.** El art. 17.1.b) habla de «mecanismos», y una entidad podría sostener que dos personas de la misma unidad son independientes. El considerando 17 pide funciones «separadas», y el modelo sigue al considerando: también es un incumplimiento. La salida dirá que esta parte depende de la lectura del considerando.
+**Lectura que adopta el modelo.** **[Decisión propia]** Distingue lo que sostiene el texto de lo que solo sostiene una lectura propia (§0.1 bis, principio 2).
+- **Régimen completo.**
+  - **El mismo actor aprueba y solicita, o aprueba y aplica: incumplimiento.** Lo sostiene el texto del art. 17.1.b) aplicado al registro, por la razón que se acaba de dar. Ninguna lectura lo salva.
+  - **Aprueba la persona responsable del agente que aplica: aviso.** Atribuir los actos del agente a su `persona_responsable` (§3.2) es una lectura propia. El resultado es «sin indicio de incumplimiento», con un aviso que remite a esta decisión y dice que, con ella, el aprobador controla la implantación.
+  - **Personas distintas de la misma función: aviso.** El art. 17.1.b) habla de «mecanismos», y una entidad podría sostener que dos personas de la misma unidad son independientes. Que las funciones deban estar «separadas» sale de la lectura del considerando 17 que adopta el modelo. El resultado es «sin indicio de incumplimiento», con un aviso que remite a esta decisión. Para esta comparación, cada agente cuenta con su propia `funcion` y con la de su `persona_responsable`.
   - **Cambio de emergencia.** Se aplica lo mismo a `emergencia.revision_posterior.aprobacion`.
-- **Régimen simplificado.** No hay requisito. La coincidencia se da como dato informativo, no como incumplimiento.
+- **Régimen simplificado.** No hay requisito. La coincidencia se da como dato informativo, no como incumplimiento ni como aviso.
 
 **Límite.** `funcion` es un valor que declara la entidad. El modelo no comprueba que dos nombres distintos sean, de verdad, funciones distintas.
 
@@ -575,8 +574,8 @@ Con el régimen completo, falta de independencia en el lado de la solicitud. En 
 
 **Lectura que adopta el modelo.** **[Decisión propia]**
 1. **Identificación y análisis (art. 16.3.a).** Una revisión hecha por un agente cuenta como revisión del art. 16.3. La norma no pide que sea humana, y negarlo obligaría a negar también las herramientas automáticas de análisis estático y dinámico, que la propia norma da por supuestas. La técnica (`estatica` o `dinamica`) se declara igual que en cualquier otra revisión.
-2. **Plan de acción (art. 16.3.b).** Adoptar el plan es una decisión de la entidad sobre cómo tratar las vulnerabilidades. El modelo exige que `plan_accion.adoptado_por` incluya al menos una persona: un agente no puede ser titular de esa responsabilidad (§3.2).
-3. **Seguimiento (art. 16.3.c).** Puede hacerlo un agente, pero el seguimiento debe tener al menos una entrada con una persona entre sus `actores`, por la misma razón.
+2. **Plan de acción (art. 16.3.b).** Adoptar el plan es una decisión de la entidad sobre cómo tratar las vulnerabilidades, y un agente no puede ser titular de esa responsabilidad (§3.2). Pero el art. 16.3.b) no dice quién adopta el plan. Si `plan_accion.adoptado_por` no incluye ninguna persona, el resultado es un aviso que remite a esta lectura, no un incumplimiento.
+3. **Seguimiento (art. 16.3.c).** Puede hacerlo un agente. Si ninguna entrada del seguimiento tiene una persona entre sus `actores`, el resultado es un aviso, por la misma razón.
 4. **Autorrevisión.** Si el agente que revisa es el mismo que implantó el cambio, la revisión cuenta igual para el art. 16.3, que no exige independencia del revisor. Es el mismo agente si es el mismo `id`, o si tiene la misma `herramienta`, el mismo `modelo` y la misma `version`. Con el régimen completo, el validador lo dará como aviso, citando el art. 17.1.c.iv), no como incumplimiento.
 5. **Régimen simplificado.** El título III no exige revisión de código. La que se registre es informativa.
 
@@ -590,13 +589,15 @@ Si una autoridad o unas directrices dijeran que la revisión del art. 16.3 debe 
 
 **Lectura que adopta el modelo.** **[Decisión propia]** `origen_codigo` lo declara la entidad, y el modelo no lo deduce del tipo de actor. Si declara `proveedor_tercero`, `software_propietario` o `codigo_abierto`, se aplica el orden del art. 16.8: alguna revisión anterior a `implantacion.inicio`. Si declara `desarrollo_interno`, se aplica el art. 16.3 sin ese orden explícito. Pero el art. 16.2 ya pide probar «antes de su uso», así que la diferencia práctica es pequeña.
 
+Declarar el origen es un dato que pide el modelo para aplicar los arts. 16.7 y 16.8; ninguno de los dos pide que conste en el registro. Por eso, si el cambio incluye código fuente y `origen_codigo` está vacía, el resultado es un aviso que remite a esta decisión, no un incumplimiento. El orden del art. 16.8, en cambio, sí lo sostiene el texto una vez declarado el origen.
+
 ### D-4. ¿Puede aprobar un agente?
 
 **Qué dice la norma.** El art. 17.1.b) habla de «las funciones que aprueban los cambios». DORA, art. 9.4.e), y el art. 37.b) dicen que los cambios se «aprueben» o «sean aprobados». Ninguno dice quién puede aprobar.
 
 **Por qué no lo determina.** La norma no se plantea que apruebe algo que no sea una persona. Aprobar es asumir la responsabilidad del cambio (considerando 17: «las funciones responsables de aprobar»).
 
-**Lectura que adopta el modelo.** **[Decisión propia]** Un paso de aprobación cuenta solo si entre sus `actores` hay al menos una persona. Se aplica a `aprobacion`, a `emergencia.revision_posterior.aprobacion` y a `excepcion_datos_produccion.aprobacion`, en los dos regímenes. Que figure también un agente no lo invalida. El agente se registra como hecho.
+**Lectura que adopta el modelo.** **[Decisión propia]** Un paso de aprobación debe tener al menos una persona entre sus `actores`. Como ningún artículo dice quién puede aprobar, si no la tiene el resultado es un aviso que remite a esta decisión, no un incumplimiento. Se aplica a `aprobacion`, a `emergencia.revision_posterior.aprobacion` y a `excepcion_datos_produccion.aprobacion`, en los dos regímenes. Que figure también un agente no lo invalida. El agente se registra como hecho.
 
 ### D-5. Cambios urgentes en el régimen simplificado
 
@@ -604,7 +605,9 @@ Si una autoridad o unas directrices dijeran que la revisión del art. 16.3 debe 
 
 **Por qué no lo determina.** Puede leerse que la entidad simplificada no tiene excepción y debe aprobar antes en todo caso. Pero el art. 37 dice que el procedimiento se aplica «en su caso» y «con arreglo a un enfoque basado en el riesgo», y eso podría dar cabida a un procedimiento de urgencia propio.
 
-**Lectura que adopta el modelo.** **[Decisión propia]**, coherente con la decisión de alcance del §0.3: en el simplificado se exige solo lo que tiene base en el título III. Un cambio con `aprobacion` `null` o posterior a `implantacion.inicio` no cumple el art. 37.b), aunque `emergencia` esté relleno. La salida dirá que el título III no prevé excepción de emergencia y que una lectura basada en el «enfoque basado en el riesgo» del art. 37 podría admitirla.
+**Qué aplica el modelo.** El texto literal del art. 37.b). Un cambio con `aprobacion` `null` o posterior a `implantacion.inicio`, o sin ninguna prueba anterior a ella, incumple el art. 37.b), aunque `emergencia` esté relleno. Es un incumplimiento y no un aviso porque lo sostiene el texto aplicado al registro (§0.1 bis, principio 2). Además, es coherente con la decisión de alcance del §0.3: en el simplificado se exige solo lo que tiene base en el título III.
+
+**Lo que documenta esta decisión.** **[Decisión propia]** La lectura alternativa: el «enfoque basado en el riesgo» del art. 37 podría dar cabida a un procedimiento de urgencia. La salida la menciona junto al incumplimiento, pero no la aplica.
 
 ---
 
