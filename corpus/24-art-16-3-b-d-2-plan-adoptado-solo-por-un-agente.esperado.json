@@ -1,0 +1,22 @@
+{
+  "caso": "24-art-16-3-b-d-2-plan-adoptado-solo-por-un-agente",
+  "articulo": "Art. 16.3.b); D-2, punto 2",
+  "descripcion": "El plan de acción lo adopta solo un agente.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-18"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

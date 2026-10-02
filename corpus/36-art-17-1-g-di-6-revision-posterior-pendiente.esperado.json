@@ -1,0 +1,24 @@
+{
+  "caso": "36-art-17-1-g-di-6-revision-posterior-pendiente",
+  "articulo": "Art. 17.1.g); dudas, DI-6",
+  "descripcion": "Falta la aprobación posterior del cambio de emergencia.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-27"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [
+        "R-23"
+      ],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

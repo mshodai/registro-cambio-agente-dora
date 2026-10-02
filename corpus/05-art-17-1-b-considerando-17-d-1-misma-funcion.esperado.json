@@ -1,0 +1,23 @@
+{
+  "caso": "05-art-17-1-b-considerando-17-d-1-misma-funcion",
+  "articulo": "Art. 17.1.b); considerando 17; D-1",
+  "descripcion": "Solicita una persona distinta de la misma función que aprueba.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-05"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-01",
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

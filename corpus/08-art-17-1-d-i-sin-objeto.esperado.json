@@ -1,0 +1,22 @@
+{
+  "caso": "08-art-17-1-d-i-sin-objeto",
+  "articulo": "Art. 17.1.d.i); dudas, DI-1",
+  "descripcion": "El objeto es una cadena vacía.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-07"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

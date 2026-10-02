@@ -1,0 +1,24 @@
+{
+  "caso": "31-art-37-b-d-4-aprobacion-solo-por-un-agente",
+  "articulo": "Art. 37.b); D-4",
+  "descripcion": "Aprueba solo un agente.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-23"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [
+        "R-23"
+      ],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

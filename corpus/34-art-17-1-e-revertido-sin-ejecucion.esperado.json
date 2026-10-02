@@ -1,0 +1,22 @@
+{
+  "caso": "34-art-17-1-e-revertido-sin-ejecucion",
+  "articulo": "Art. 17.1.e)",
+  "descripcion": "El cambio se revirtió y no consta cómo.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-25"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

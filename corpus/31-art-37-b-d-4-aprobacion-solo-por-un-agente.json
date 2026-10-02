@@ -1,0 +1,280 @@
+{
+  "version_modelo": 1,
+  "actores": [
+    {
+      "id": "P-1",
+      "tipo": "persona",
+      "funcion": "FUNCION-NEGOCIO-EJEMPLO",
+      "cuenta": "CUENTA-EJEMPLO-1"
+    },
+    {
+      "id": "P-2",
+      "tipo": "persona",
+      "funcion": "FUNCION-APROBACION-EJEMPLO",
+      "cuenta": "CUENTA-EJEMPLO-2"
+    },
+    {
+      "id": "P-3",
+      "tipo": "persona",
+      "funcion": "FUNCION-DESARROLLO-EJEMPLO",
+      "cuenta": "CUENTA-EJEMPLO-3"
+    },
+    {
+      "id": "AG-1",
+      "tipo": "agente_ia",
+      "funcion": "FUNCION-DESARROLLO-EJEMPLO",
+      "cuenta": "CUENTA-EJEMPLO-4",
+      "herramienta": "HERRAMIENTA-EJEMPLO",
+      "modelo": "MODELO-EJEMPLO",
+      "version": "0.0-ejemplo",
+      "persona_responsable": "P-3"
+    },
+    {
+      "id": "AG-2",
+      "tipo": "agente_ia",
+      "funcion": "FUNCION-APROBACION-EJEMPLO",
+      "cuenta": "CUENTA-EJEMPLO-5",
+      "herramienta": "HERRAMIENTA-EJEMPLO-2",
+      "modelo": "MODELO-EJEMPLO-2",
+      "version": "0.0-ejemplo",
+      "persona_responsable": "P-2"
+    }
+  ],
+  "cambio": {
+    "id": "CAMBIO-EJEMPLO-1",
+    "elementos": [
+      "software"
+    ],
+    "objeto": "Objeto de ejemplo 1 (inventado)",
+    "alcance": {
+      "descripcion": "Alcance de ejemplo 1 (inventado)",
+      "sistemas": [
+        "SISTEMA-EJEMPLO-1"
+      ]
+    },
+    "calendario": {
+      "inicio_previsto": "2026-11-09T09:00:00+01:00",
+      "fin_previsto": "2026-11-09T12:00:00+01:00"
+    },
+    "resultados_esperados": "Resultado esperado de ejemplo 1 (inventado)",
+    "comunicaciones": [
+      {
+        "fecha": "2026-11-04T10:00:00+01:00",
+        "destinatarios": "Destinatarios de ejemplo (inventados)"
+      }
+    ],
+    "incluye_codigo_fuente": true,
+    "origen_codigo": [
+      "desarrollo_interno"
+    ],
+    "cambio_importante": false,
+    "solicitud": {
+      "actores": [
+        "P-1"
+      ],
+      "fecha": "2026-11-02T09:30:00+01:00"
+    },
+    "responsabilidades": {
+      "especificacion_planificacion": [
+        "P-1",
+        "P-3"
+      ],
+      "diseno_transicion": [
+        "P-3"
+      ],
+      "pruebas_ultimacion": [
+        "P-3"
+      ],
+      "aseguramiento_calidad": [
+        "P-3"
+      ]
+    },
+    "verificacion_seguridad": {
+      "actores": [
+        "P-3"
+      ],
+      "fecha": "2026-11-05T16:00:00+01:00",
+      "resultado": "cumple",
+      "evidencias": [
+        {
+          "referencia": "EVIDENCIA-EJEMPLO-1",
+          "descripcion": "Evidencia de ejemplo (inventada)"
+        }
+      ]
+    },
+    "evaluacion": {
+      "actores": [
+        "P-3"
+      ],
+      "fecha": "2026-11-05T16:30:00+01:00",
+      "repercusion_seguridad": "Repercusión de ejemplo (inventada)",
+      "requiere_medidas_adicionales": false,
+      "medidas_adicionales": [],
+      "riesgos": null
+    },
+    "controles_integridad": [
+      {
+        "descripcion": "Control de ejemplo 1 (inventado)",
+        "evidencias": [
+          {
+            "referencia": "EVIDENCIA-EJEMPLO-2",
+            "descripcion": null
+          }
+        ]
+      }
+    ],
+    "pruebas": [
+      {
+        "id": "PR-1",
+        "tipo": "idoneidad",
+        "descripcion": "Prueba de ejemplo 1 (inventada)",
+        "realizada_por": [
+          "AG-1"
+        ],
+        "fecha": "2026-11-05T11:00:00+01:00",
+        "fase": "integracion",
+        "entorno": "no_produccion",
+        "datos": "sin_datos_produccion",
+        "excepcion_datos_produccion": null,
+        "resultado": "superada",
+        "evidencias": [
+          {
+            "referencia": "EVIDENCIA-EJEMPLO-3",
+            "descripcion": null
+          }
+        ]
+      },
+      {
+        "id": "PR-2",
+        "tipo": "seguridad_paquetes",
+        "descripcion": "Prueba de ejemplo 2 (inventada)",
+        "realizada_por": [
+          "P-3"
+        ],
+        "fecha": "2026-11-05T12:00:00+01:00",
+        "fase": "integracion",
+        "entorno": "no_produccion",
+        "datos": "sin_datos_produccion",
+        "excepcion_datos_produccion": null,
+        "resultado": "superada",
+        "evidencias": [
+          {
+            "referencia": "EVIDENCIA-EJEMPLO-4",
+            "descripcion": null
+          }
+        ]
+      }
+    ],
+    "revisiones_codigo": [
+      {
+        "id": "RC-1",
+        "realizada_por": [
+          "P-3"
+        ],
+        "fecha": "2026-11-05T13:00:00+01:00",
+        "tecnicas": [
+          "estatica"
+        ],
+        "hallazgos": [
+          {
+            "id": "H-1",
+            "descripcion": "Hallazgo de ejemplo 1 (inventado)"
+          }
+        ],
+        "plan_accion": {
+          "adoptado_por": [
+            "P-3"
+          ],
+          "fecha": "2026-11-05T14:00:00+01:00",
+          "medidas": [
+            {
+              "hallazgos": [
+                "H-1"
+              ],
+              "descripcion": "Medida de ejemplo 1 (inventada)"
+            }
+          ]
+        },
+        "seguimiento": [
+          {
+            "actores": [
+              "P-3"
+            ],
+            "fecha": "2026-11-05T15:30:00+01:00",
+            "estado": "completado",
+            "descripcion": null
+          }
+        ],
+        "evidencias": [
+          {
+            "referencia": "EVIDENCIA-EJEMPLO-5",
+            "descripcion": null
+          }
+        ]
+      },
+      {
+        "id": "RC-2",
+        "realizada_por": [
+          "P-3"
+        ],
+        "fecha": "2026-11-05T15:00:00+01:00",
+        "tecnicas": [
+          "dinamica"
+        ],
+        "hallazgos": [],
+        "plan_accion": null,
+        "seguimiento": [],
+        "evidencias": [
+          {
+            "referencia": "EVIDENCIA-EJEMPLO-6",
+            "descripcion": null
+          }
+        ]
+      }
+    ],
+    "vuelta_atras": {
+      "responsables": [
+        "P-3"
+      ],
+      "procedimiento": "Procedimiento de ejemplo (inventado)",
+      "ejecucion": null
+    },
+    "aprobacion": {
+      "actores": [
+        "AG-2"
+      ],
+      "fecha": "2026-11-06T10:00:00+01:00"
+    },
+    "emergencia": null,
+    "implantacion": {
+      "actores": [
+        "AG-1"
+      ],
+      "inicio": "2026-11-09T09:05:00+01:00",
+      "fin": "2026-11-09T09:40:00+01:00",
+      "resultado": "aplicado"
+    },
+    "verificacion_posterior": {
+      "actores": [
+        "P-3"
+      ],
+      "fecha": "2026-11-09T11:00:00+01:00",
+      "resultado": "conforme",
+      "descripcion": null
+    },
+    "acciones": [
+      {
+        "actor": "AG-1",
+        "fecha": "2026-11-09T09:05:00+01:00",
+        "etapa": "implantacion",
+        "descripcion": "Acción de ejemplo 1 (inventada)"
+      },
+      {
+        "actor": "AG-1",
+        "fecha": "2026-11-09T09:40:00+01:00",
+        "etapa": "implantacion",
+        "descripcion": "Acción de ejemplo 2 (inventada)"
+      }
+    ]
+  }
+}

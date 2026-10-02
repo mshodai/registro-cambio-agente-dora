@@ -1,0 +1,22 @@
+{
+  "caso": "25-art-16-3-b-hallazgo-sin-medida",
+  "articulo": "Art. 16.3.b)",
+  "descripcion": "Un hallazgo sin medida en el plan de acción.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-18"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

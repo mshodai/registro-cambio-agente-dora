@@ -1,0 +1,24 @@
+{
+  "caso": "39-dora-art-9-4-e-art-38-2-sin-verificacion-posterior",
+  "articulo": "DORA, art. 9.4.e); art. 38.2",
+  "descripcion": "No se verificó el cambio.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-28"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [
+        "R-28"
+      ],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

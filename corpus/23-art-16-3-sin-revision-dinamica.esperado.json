@@ -1,0 +1,22 @@
+{
+  "caso": "23-art-16-3-sin-revision-dinamica",
+  "articulo": "Art. 16.3",
+  "descripcion": "Ninguna revisión usa la técnica dinámica.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-17"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "caso": "10-art-17-1-d-sin-comunicaciones",
+  "articulo": "Art. 17.1.d), encabezado",
+  "descripcion": "No se comunicaron los detalles.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-10"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

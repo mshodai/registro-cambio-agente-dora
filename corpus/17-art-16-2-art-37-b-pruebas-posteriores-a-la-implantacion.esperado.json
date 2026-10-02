@@ -1,0 +1,24 @@
+{
+  "caso": "17-art-16-2-art-37-b-pruebas-posteriores-a-la-implantacion",
+  "articulo": "Art. 16.2; art. 37.b)",
+  "descripcion": "Todas las pruebas son posteriores a la implantación.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-14"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [
+        "R-14"
+      ],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

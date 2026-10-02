@@ -1,0 +1,22 @@
+{
+  "caso": "15-art-31-1-e-cambio-importante-sin-riesgos",
+  "articulo": "Art. 31.1.e)",
+  "descripcion": "Cambio importante sin evaluación de riesgos: solo simplificado.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [
+        "R-13"
+      ],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "caso": "11-art-17-1-a-sin-verificacion-de-seguridad",
+  "articulo": "Art. 17.1.a)",
+  "descripcion": "No se verificaron los requisitos de seguridad.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-11"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

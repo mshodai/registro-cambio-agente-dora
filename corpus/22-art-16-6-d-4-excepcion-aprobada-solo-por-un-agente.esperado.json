@@ -1,0 +1,22 @@
+{
+  "caso": "22-art-16-6-d-4-excepcion-aprobada-solo-por-un-agente",
+  "articulo": "Art. 16.6; D-4",
+  "descripcion": "La excepción de datos de producción la aprueba solo un agente.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-16"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

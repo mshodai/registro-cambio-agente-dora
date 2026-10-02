@@ -1,0 +1,22 @@
+{
+  "caso": "33-art-17-1-e-sin-vuelta-atras",
+  "articulo": "Art. 17.1.e)",
+  "descripcion": "No hay procedimiento de vuelta atrás.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-25"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "caso": "18-art-16-2-art-37-b-sin-pruebas",
+  "articulo": "Art. 16.2; art. 37.b); dudas, DI-8",
+  "descripcion": "No hay pruebas.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-14"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [
+        "R-14"
+      ],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

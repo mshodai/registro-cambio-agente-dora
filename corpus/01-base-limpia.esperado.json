@@ -1,0 +1,20 @@
+{
+  "caso": "01-base-limpia",
+  "articulo": "—",
+  "descripcion": "Base limpia, sin incumplimientos ni avisos.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 0
+  }
+}

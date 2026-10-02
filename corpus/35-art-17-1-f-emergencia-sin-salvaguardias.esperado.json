@@ -1,0 +1,24 @@
+{
+  "caso": "35-art-17-1-f-emergencia-sin-salvaguardias",
+  "articulo": "Art. 17.1.f)",
+  "descripcion": "Cambio de emergencia sin salvaguardias.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-26"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [
+        "R-23"
+      ],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

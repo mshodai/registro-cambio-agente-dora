@@ -1,0 +1,22 @@
+{
+  "caso": "21-art-16-5-a-datos-de-produccion-sin-excepcion",
+  "articulo": "Art. 16.5.a)",
+  "descripcion": "Una prueba fuera de producción usa datos de producción sin excepción.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-16"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

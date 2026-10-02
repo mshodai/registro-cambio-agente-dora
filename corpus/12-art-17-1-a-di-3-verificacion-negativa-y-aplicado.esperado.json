@@ -1,0 +1,22 @@
+{
+  "caso": "12-art-17-1-a-di-3-verificacion-negativa-y-aplicado",
+  "articulo": "Art. 17.1.a); dudas, DI-3",
+  "descripcion": "La verificación da no_cumple y el cambio se aplica.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-11"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

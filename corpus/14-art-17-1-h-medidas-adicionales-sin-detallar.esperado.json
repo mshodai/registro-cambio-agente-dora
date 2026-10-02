@@ -1,0 +1,22 @@
+{
+  "caso": "14-art-17-1-h-medidas-adicionales-sin-detallar",
+  "articulo": "Art. 17.1.h)",
+  "descripcion": "Hacen falta medidas adicionales y no se dice cuáles.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-12"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

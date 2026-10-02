@@ -1,0 +1,22 @@
+{
+  "caso": "40-art-17-1-c-iv-d-2-aviso-autorrevision",
+  "articulo": "Art. 17.1.c.iv); D-2, punto 4",
+  "descripcion": "Revisa otro agente con la misma herramienta, modelo y versión que el que implanta: aviso, no incumplimiento.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [],
+      "avisos": [
+        "A-01"
+      ],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 0
+  }
+}

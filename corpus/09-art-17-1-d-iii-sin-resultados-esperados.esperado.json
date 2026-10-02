@@ -1,0 +1,22 @@
+{
+  "caso": "09-art-17-1-d-iii-sin-resultados-esperados",
+  "articulo": "Art. 17.1.d.iii)",
+  "descripcion": "Faltan los resultados esperados.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-09"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

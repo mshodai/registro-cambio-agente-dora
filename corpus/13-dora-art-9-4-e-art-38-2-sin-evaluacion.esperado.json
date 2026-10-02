@@ -1,0 +1,24 @@
+{
+  "caso": "13-dora-art-9-4-e-art-38-2-sin-evaluacion",
+  "articulo": "DORA, art. 9.4.e); art. 38.2",
+  "descripcion": "No se evaluó el cambio.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-12"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [
+        "R-12"
+      ],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

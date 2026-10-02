@@ -1,0 +1,22 @@
+{
+  "caso": "28-art-16-8-d-3-codigo-abierto-revisado-despues",
+  "articulo": "Art. 16.8; D-3",
+  "descripcion": "Código abierto revisado después de la implantación.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-21"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

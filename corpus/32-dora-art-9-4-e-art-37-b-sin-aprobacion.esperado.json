@@ -1,0 +1,24 @@
+{
+  "caso": "32-dora-art-9-4-e-art-37-b-sin-aprobacion",
+  "articulo": "DORA, art. 9.4.e); art. 37.b); dudas, DI-9",
+  "descripcion": "Sin aprobación y sin emergencia.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-23"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [
+        "R-23"
+      ],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}

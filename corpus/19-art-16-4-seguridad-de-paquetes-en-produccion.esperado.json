@@ -1,0 +1,22 @@
+{
+  "caso": "19-art-16-4-seguridad-de-paquetes-en-produccion",
+  "articulo": "Art. 16.4",
+  "descripcion": "La prueba de seguridad de paquetes se hace en producción.",
+  "resultado": {
+    "completo": {
+      "incumplimientos": [
+        "R-15"
+      ],
+      "avisos": [],
+      "informativos": []
+    },
+    "simplificado": {
+      "incumplimientos": [],
+      "avisos": [],
+      "informativos": [
+        "I-02"
+      ]
+    },
+    "codigo_salida": 1
+  }
+}
